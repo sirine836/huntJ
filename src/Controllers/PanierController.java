@@ -8,8 +8,11 @@ package Controllers;
 import Entities.Lignepanier;
 import Services.LignePanierService;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,9 +60,9 @@ public class PanierController implements Initializable {
     
     @FXML
     private void deleteItem(ActionEvent event) throws SQLException {
-        
+        LignePanierService l=new LignePanierService();
         if(TableId.getSelectionModel().getSelectedItems().size()!=0){
-            LignePanierService l=new LignePanierService();
+            
            l.supprimerLigne(TableId.getSelectionModel().getSelectedItems().get(0).getId());
         }
        else{
@@ -68,12 +71,12 @@ public class PanierController implements Initializable {
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
         alert.setContentText("aucun élément 'a ètè séléctionné");
-        alert.showAndWait();
-
-           
-        
+        alert.showAndWait(); 
        }
     }
+    
+    
+    
     
    
     
