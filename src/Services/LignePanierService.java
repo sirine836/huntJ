@@ -48,7 +48,7 @@ public class LignePanierService {
     }
     
     public void supprimerLigne(int id) throws SQLException {
-        String req = "DELETE FROM `ligne_panier` where id= "+id;
+        String req = "DELETE * FROM `ligne_panier` where id= "+id;
         Statement pstm = connexion.createStatement();
         pstm.executeUpdate(req);
         System.out.println("LignePanier Supprimer");

@@ -5,48 +5,47 @@
  */
 package Controllers;
 
-import com.jfoenix.controls.JFXButton;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import java.io.IOException;
+import Entities.Lignepanier;
+import Services.LignePanierService;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author youss
+ * @author cyrine
  */
 public class PanierController implements Initializable {
-
+    
     @FXML
-    private AnchorPane mainPane;
+    private Button delete;
     @FXML
-    private JFXButton btnclient;
+    private TableView<Lignepanier> table;
+    LignePanierService cs =new LignePanierService();
     @FXML
-    private Pane firstpane;
-    @FXML
-    private JFXButton logbtn;
-    @FXML
-    private FontAwesomeIcon logout;
-
-   
-    @FXML
-    private JFXButton btnrec;
-    @FXML
-    private JFXButton btnreview;
+    private TableView<Lignepanier> TableId;
     @FXML
     private AnchorPane avr;
+    @FXML
+    private TableColumn<?, ?> nompr;
+    @FXML
+    private TableColumn<?, ?> descrip;
+    @FXML
+    private TableColumn<?, ?> prix;
+    @FXML
+    private TableColumn<?, ?> quantity;
+    @FXML
+    private Label PrixTotal;
 
     /**
      * Initializes the controller class.
@@ -55,21 +54,27 @@ public class PanierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
     @FXML
-    private void btnrec(ActionEvent event) throws IOException {
-        avr.getChildren().clear();
-        Parent parent = FXMLLoader.load(getClass().getResource("TroubleShooting.fxml"));
-        avr.getChildren().add(parent);
-        avr.toFront();
-    }
+    private void deleteItem(ActionEvent event) throws SQLException {
+        
+        if(TableId.getSelectionModel().getSelectedItems().size()!=0){
+            LignePanierService l=new LignePanierService();
+           l.supprimerLigne(TableId.getSelectionModel().getSelectedItems().get(0).getId());
+        }
+       else{
+           
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("aucun élément 'a ètè séléctionné");
+        alert.showAndWait();
 
-    @FXML
-    private void btnreview(ActionEvent event) throws IOException {
-        avr.getChildren().clear();
-        Parent parent = FXMLLoader.load(getClass().getResource("Review.fxml"));
-        avr.getChildren().add(parent);
-        avr.toFront();
+           
+        
+       }
     }
+    
+   
     
 }

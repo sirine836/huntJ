@@ -77,6 +77,10 @@ public class Lignepanier {
         return "Lignepanier{" + "idlp=" + idlp + ", product_id=" + product_id + ", panier_id=" + panier_id + ", quantite=" + quantite + '}';
     }
 
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    
 
    
