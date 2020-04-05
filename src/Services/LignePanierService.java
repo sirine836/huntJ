@@ -110,6 +110,8 @@ public class LignePanierService {
     }
     
     
+  
+    
     
     public void calcul_total() throws SQLException{
             String query="SELECT sum(p.prix*quantite) as total FROM ligne_panier l JOIN product p ON p.id = l.product_id";
