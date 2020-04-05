@@ -32,14 +32,14 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <Label layoutX="341.0" layoutY="545.0" prefHeight="28.0" prefWidth="153.0" text="Total Amount :">
+                  <Label layoutX="341.0" layoutY="545.0" prefHeight="28.0" prefWidth="153.0" text="Prix Total:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <JFXButton buttonType="RAISED" layoutX="730.0" layoutY="545.0" prefHeight="30.0" prefWidth="152.0" ripplerFill="#19839e" style="-fx-background-color: #fcc511;" text="Confirm Order" textFill="WHITE" />
                   <JFXButton buttonType="RAISED" layoutX="163.0" layoutY="545.0" prefHeight="25.0" prefWidth="98.0" ripplerFill="#fcdfdf" style="-fx-background-color: #ff6647;" text="Delete" textFill="WHITE" />
-                  <Label fx:id="totalAmount" layoutX="494.0" layoutY="540.0" prefHeight="35.0" prefWidth="98.0" text="0" textFill="#f50f0f">
+                  <Label fx:id="PrixTotal" layoutX="494.0" layoutY="540.0" prefHeight="35.0" prefWidth="98.0" text="0" textFill="#f50f0f">
                      <font>
                         <Font size="24.0" />
                      </font>
