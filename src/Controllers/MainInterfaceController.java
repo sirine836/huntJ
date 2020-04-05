@@ -25,20 +25,24 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author youss
+ * @author cyrine
  */
 public class MainInterfaceController implements Initializable {
 
     @FXML
     private AnchorPane mainPane;
     @FXML
-    private JFXButton btnclient;
+    private JFXButton btnprod;
     @FXML
-    private Pane firstpane;
+    private JFXButton btnclient;
     @FXML
     private JFXButton logbtn;
     @FXML
     private FontAwesomeIcon logout;
+    @FXML
+    private JFXButton btnpan;
+    @FXML
+    private Pane firstpane;
 
     /**
      * Initializes the controller class.
@@ -48,7 +52,7 @@ public class MainInterfaceController implements Initializable {
         // TODO
     }    
 
-    @FXML
+   @FXML
     private void btnpan(ActionEvent event) throws IOException {
          firstpane.getChildren().clear();
         Parent parent = FXMLLoader.load(getClass().getResource("Panier.fxml"));
@@ -74,11 +78,11 @@ public class MainInterfaceController implements Initializable {
     }
 
     @FXML
-    private void logout(MouseEvent event) {
+    private void logout(MouseEvent event) throws IOException {
     }
 
     @FXML
-    private void logbtn(ActionEvent event) throws IOException {
+    private void logbtn(ActionEvent event)  throws IOException {
          Stage stage1 = (Stage) mainPane.getScene().getWindow();
             
         stage1.close();
@@ -92,5 +96,9 @@ public class MainInterfaceController implements Initializable {
         stage.setTitle("T-HUNT");
         stage.show();
     }
+
+   
+    
+    
     
 }
