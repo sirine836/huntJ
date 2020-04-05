@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="image" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLsellerController">
+   <children>
+      <TextField fx:id="taxnumber" layoutX="188.0" layoutY="100.0" promptText="TAX" />
+      <TextField fx:id="rcs" layoutX="188.0" layoutY="69.0" promptText="RCS" />
+      <TextField fx:id="sellername" layoutX="188.0" layoutY="38.0" promptText="Company" />
+      <TextField fx:id="tva" layoutX="188.0" layoutY="131.0" promptText="TVA" />
+      <TextField fx:id="siren" layoutX="188.0" layoutY="162.0" promptText="SIREN" />
+      <TextField fx:id="fax" layoutX="188.0" layoutY="193.0" promptText="FAX" />
+      <TextField fx:id="phonenumber" layoutX="188.0" layoutY="224.0" promptText="Phone" />
+      <TextField fx:id="email" layoutX="188.0" layoutY="255.0" promptText="Email" />
+      <Button fx:id="addSeller" layoutX="392.0" layoutY="344.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="31.0" prefWidth="123.0" text="SAVE" />
+      <Button fx:id="license" layoutX="188.0" layoutY="293.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="187.0" text="Upload License" />
+      <Button layoutX="521.0" layoutY="344.0" mnemonicParsing="false" onAction="#ClearFields" text="Clear" />
+   </children>
+</AnchorPane>
