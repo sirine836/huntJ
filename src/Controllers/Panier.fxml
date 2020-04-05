@@ -38,7 +38,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXButton buttonType="RAISED" layoutX="730.0" layoutY="545.0" prefHeight="30.0" prefWidth="152.0" ripplerFill="#19839e" style="-fx-background-color: #fcc511;" text="Commander" textFill="WHITE" />
+                  <JFXButton buttonType="RAISED" layoutX="730.0" layoutY="545.0" prefHeight="30.0" prefWidth="152.0" ripplerFill="#19839e" style="-fx-background-color: #fcc511;" onAction="#paymentScreen" text="Commander" textFill="WHITE" />
                   <Label fx:id="PrixTotal" layoutX="494.0" layoutY="540.0" prefHeight="35.0" prefWidth="98.0" text="0" textFill="#f50f0f">
                      <font>
                         <Font size="24.0" />
