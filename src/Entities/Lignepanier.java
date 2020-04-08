@@ -11,6 +11,8 @@ package Entities;
  */
 public class Lignepanier {
     private int idlp,product_id,panier_id, quantite;
+    private String nompr,descrip;
+    private double prix;
 
     
 /*--------------------------------------------------*/
@@ -18,10 +20,47 @@ public class Lignepanier {
     public Lignepanier() {
     }
 
+    public Lignepanier(int idlp, int product_id, String nompr, int quantite) {
+        this.idlp = idlp;
+        this.product_id = product_id;
+        this.quantite = quantite;
+        this.nompr = nompr;
+    }
+
+    public Lignepanier( String nompr, String descrip, double prix, int quantite) {
+        this.quantite = quantite;
+        this.nompr = nompr;
+        this.descrip = descrip;
+        this.prix = prix;
+    }
+    
+    
+
+    public Lignepanier(int idlp, String nompr, int quantite) {
+        this.idlp = idlp;
+        this.quantite = quantite;
+        this.nompr = nompr;
+    }
+
+    public Lignepanier( String nompr, int quantite) {
+        this.quantite = quantite;
+        this.nompr = nompr;
+    }
+    
+    
+    
+    
+
     public Lignepanier(int idlp, int product_id, int panier_id, int quantite) {
         this.idlp = idlp;
         this.product_id = product_id;
         this.panier_id = panier_id;
+        this.quantite = quantite;
+    }
+
+    public Lignepanier(int idlp, int product_id, int quantite) {
+        this.idlp = idlp;
+        this.product_id = product_id;
         this.quantite = quantite;
     }
 
@@ -69,17 +108,48 @@ public class Lignepanier {
     public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
+
+    public String getNompr() {
+        return nompr;
+    }
+
+    public void setNompr(String nompr) {
+        this.nompr = nompr;
+    }
+
+    public String getDescrip() {
+        return descrip;
+    }
+
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+    
     
     /*---------------------------------------------------*/
 
     @Override
     public String toString() {
-        return "Lignepanier{" + "idlp=" + idlp + ", product_id=" + product_id + ", panier_id=" + panier_id + ", quantite=" + quantite + '}';
+        return "Lignepanier{" + "idlp=" + idlp + ", product_id=" + product_id + ", panier_id=" + panier_id + ", quantite=" + quantite + ", nompr=" + nompr + ", descrip=" + descrip + ", prix=" + prix + '}';
     }
+
+    
+
+    
 
     public int getId() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 
    
 
