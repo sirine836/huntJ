@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,7 +35,8 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn1" buttonType="RAISED" layoutX="55.0" layoutY="195.0"  style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                              <TextField layoutX="74.0" layoutY="190.0" prefHeight="18.0" prefWidth="29.0" fx:id="b1" promptText="50" text="50" />
+                              <JFXButton id="1" fx:id="btn1" buttonType="RAISED" layoutX="39.0" layoutY="190.0" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                           </items>
