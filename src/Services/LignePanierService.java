@@ -6,6 +6,7 @@
 package Services;
 
 import Entities.Lignepanier;
+import Entities.Product;
 import Utils.MyDbConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 
 /**
  *
@@ -122,4 +126,45 @@ public class LignePanierService {
             }
     }
 
+   public boolean trouve(int id) {    
+        String req= " select p.nompr,P.descrip,P.prix from product p where "+id+"=  p.id ";
+        try {
+            Statement pstm = connexion.createStatement();
+       ResultSet rst = pstm.executeQuery(req);
+       rst.last();
+       int nbrRow=rst.getRow();
+       if (nbrRow != 0 )
+       {return true;}
+       
+        } catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("rrrr");
+        }
+          return  false;
+     }
+
+    
+    
+    public ObservableList<Lignepanier> indexAction() 
+     { 
+        ObservableList<Lignepanier> ligne=FXCollections.observableArrayList();
+        String req= " select p.nompr,P.descrip,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id ";
+        Statement st;
+        try {
+            st=connexion.createStatement();
+            ResultSet result=st.executeQuery(req);
+            while(result.next())
+            {    Lignepanier p = new Lignepanier(result.getString("nompr"),result.getString("descrip"),result.getDouble("prix"),result.getInt("quantite"));
+            ligne.add(p);
+                    }
+        } catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("rrrr");
+        }
+          return  ligne;
+     }
+
+    
+
+   
 }
