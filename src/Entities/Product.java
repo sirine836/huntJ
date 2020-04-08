@@ -8,9 +8,9 @@ package Entities;
 public class Product {
     private int id;
     private String nompr;
-    private String quantity;
+    private int quantity;
     private String descrip;
-    private String prix;
+    private double prix;
     private String image;
     private String idCategory;
     private String namecat;
@@ -18,7 +18,16 @@ public class Product {
     public Product() {
     }
 
-    public Product(String nompr, String quantity, String descrip, String prix, String image, String idCategory) {
+    public Product(int id, String nompr, String descrip, double prix) {
+        this.id = id;
+        this.nompr = nompr;
+        this.descrip = descrip;
+        this.prix = prix;
+    }
+    
+    
+
+    public Product(String nompr, int quantity, String descrip, double prix, String image, String idCategory) {
         this.nompr = nompr;
         this.quantity = quantity;
         this.descrip = descrip;
@@ -27,7 +36,7 @@ public class Product {
         this.idCategory= idCategory;
     }
 
-    public Product(int id, String nompr, String quantity, String descrip, String prix, String image,String namecat) {
+    public Product(int id, String nompr, int quantity, String descrip, double prix, String image,String namecat) {
         this.id = id;
         this.nompr = nompr;
         this.quantity = quantity;
@@ -37,6 +46,8 @@ public class Product {
         this.namecat = namecat;
         //this.idCategory = idCategory;
     }
+
+    
 
     public String getIdCategory() {
         return idCategory;
@@ -74,11 +85,11 @@ public class Product {
         this.nompr = nompr;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -90,13 +101,15 @@ public class Product {
         this.descrip = descrip;
     }
 
-    public String getPrix() {
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(String prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
+    
+    
 
     @Override
     public String toString() {
