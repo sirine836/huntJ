@@ -5,14 +5,21 @@
  */
 package Controllers;
 
+
+import javafx.scene.control.cell.PropertyValueFactory;
 import Entities.Lignepanier;
+import Entities.Panier;
+import Entities.Product;
 import Services.LignePanierService;
+import Services.ProductService;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,25 +37,44 @@ import javafx.scene.layout.AnchorPane;
  */
 public class PanierController implements Initializable {
     
-    @FXML
-    private Button delete;
+   
+   
+    
+     @FXML
+    private AnchorPane avr;
+
     @FXML
     private TableView<Lignepanier> table;
-    LignePanierService cs =new LignePanierService();
+
     @FXML
-    private TableView<Lignepanier> TableId;
+    private TableColumn<Lignepanier, String> nompr;
+    
     @FXML
-    private AnchorPane avr;
+    private TableColumn<Lignepanier, String> descrip;
+    
     @FXML
-    private TableColumn<?, ?> nompr;
+    private TableColumn<Lignepanier, Double> prix;
+
     @FXML
-    private TableColumn<?, ?> descrip;
+    private TableColumn<Lignepanier, String> quantite;
+
     @FXML
-    private TableColumn<?, ?> prix;
-    @FXML
-    private TableColumn<?, ?> quantity;
+    private Button aff;
+
     @FXML
     private Label PrixTotal;
+
+    @FXML
+    private Button delete;
+
+    @FXML
+    private Button comm;
+    
+    
+     public ObservableList<Lignepanier> data = FXCollections.observableArrayList();
+  
+    
+    
 
     /**
      * Initializes the controller class.
@@ -61,9 +87,9 @@ public class PanierController implements Initializable {
     @FXML
     private void deleteItem(ActionEvent event) throws SQLException {
         LignePanierService l=new LignePanierService();
-        if(TableId.getSelectionModel().getSelectedItems().size()!=0){
+        if(table.getSelectionModel().getSelectedItems().size()!=0){
             
-           l.supprimerLigne(TableId.getSelectionModel().getSelectedItems().get(0).getId());
+           l.supprimerLigne(table.getSelectionModel().getSelectedItems().get(0).getId());
         }
        else{
            
@@ -76,8 +102,20 @@ public class PanierController implements Initializable {
     }
     
     
+   public void affic(ActionEvent event) throws SQLException {
+      
+       LignePanierService ser = new LignePanierService();
+    nompr.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("nompr"));
+    descrip.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("descrip"));
+     prix.setCellValueFactory(new PropertyValueFactory<Lignepanier,Double>("prix"));
+     quantite.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("quantite"));
+        data =ser.indexAction();
+        System.out.println(data);
+        table.setItems(data);
+        System.out.println(data);
+       }
     
     
-   
+    
     
 }
