@@ -116,5 +116,42 @@ public class PanierService {
        System.out.println(nbrRow);
     }
    
+   /*--------------- chercher le panier disponible ---------------------------*/
+   
+   public Panier getCurrentPanierByUserID(int id_user) throws SQLException {
+        String req = "select * FROM `panier` where user= '"+id_user+"' and etat=0 ";
+        //Statement pstm = connexion.createStatement();
+        PreparedStatement pstm = connexion.prepareStatement(req);
+       ResultSet rst = pstm.executeQuery();
+       Panier panier = new Panier();
+       while (rst.next()) {
+                panier.setIdpan(rst.getInt("id"));
+                panier.setUser(rst.getInt("user"));
+                panier.setEtat(rst.getInt("etat"));
+                panier.setDatepanier(rst.getString("datePanier"));
+                panier.setPrixtotal(rst.getDouble("prixTotal"));
+                panier.setArchive(rst.getInt("archive"));
+       }
+
+            
+       
+/*       
+//rst.last();
+       //int nbrRow=rst.getRow();
+       
+       
+       //if (nbrRow != 0 )
+       //{
+       //System.out.println("Panier trouver");
+       
+       
+          
+       
+       }
+       else{ System.out.println("Panier non trouver");}
+       */
+       return panier;
+
+    }
 
 }
