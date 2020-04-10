@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="avr" cache="true" cacheHint="ROTATE" prefHeight="746.0" prefWidth="939.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
    <children>
-      <ScrollPane prefHeight="746.0" prefWidth="939.0">
+      <ScrollPane prefHeight="839.0" prefWidth="943.0">
                <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="856.0" prefWidth="933.0" style="-fx-background-color: white;">
                      <children>
@@ -35,8 +34,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField layoutX="74.0" layoutY="190.0" prefHeight="18.0" prefWidth="29.0" fx:id="b1" promptText="50" text="50" />
-                              <JFXButton id="1" fx:id="btn1" buttonType="RAISED" layoutX="39.0" layoutY="190.0" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                              <JFXButton fx:id="btn1" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart1" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                           </items>
@@ -50,7 +48,7 @@
                                           <Image url="@../Images/sac-a-dos-chasse-20-litres-camouflage-island-vert.jpg" />
                                        </image>
                                     </ImageView>
-                                    <JFXButton fx:id="btn2" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn2" buttonType="RAISED" layoutX="40.0" layoutY="195.0" onAction="#addToCart2" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                               <Label alignment="CENTER" layoutX="8.0" layoutY="139.0" prefHeight="24.0" prefWidth="175.0" text="Sac A Dos" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
@@ -83,7 +81,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn3" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn3" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart3" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -106,7 +104,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn4" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn4" buttonType="RAISED" layoutX="43.0" layoutY="195.0" onAction="#addToCart4" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -129,7 +127,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn5" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn5" buttonType="RAISED" layoutX="37.0" layoutY="195.0" onAction="#addToCart5" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -152,7 +150,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn6" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn6" buttonType="RAISED" layoutX="38.0" layoutY="195.0" onAction="#addToCart6" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -175,7 +173,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn7" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn7" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart7" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -198,7 +196,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn8" buttonType="RAISED" layoutX="51.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn8" buttonType="RAISED" layoutX="40.0" layoutY="195.0" onAction="#addToCart8" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -221,7 +219,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn9" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn9" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart9" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -244,7 +242,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn12" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn12" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart10" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -271,7 +269,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                                    <JFXButton fx:id="btn11" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn11" buttonType="RAISED" layoutX="43.0" layoutY="195.0" onAction="#addToCart11" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -294,7 +292,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                                    <JFXButton fx:id="btn10" buttonType="RAISED" layoutX="55.0" layoutY="195.0" style="-fx-background-color: #5DADE2;" text="Add To Cart" textFill="WHITE" />
+                                    <JFXButton fx:id="btn10" buttonType="RAISED" layoutX="43.0" layoutY="195.0" onAction="#addToCart12" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </items>
