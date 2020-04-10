@@ -75,7 +75,7 @@ public class Lignepanier {
    
   /*---------------------------------------------------*/  
 
-    public int getId() {
+    public int getIdlp() {
         return idlp;
     }
 
