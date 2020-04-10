@@ -43,7 +43,7 @@ public class ProductService {
      public ObservableList<Product> indexActionP() 
      { 
         ObservableList<Product> prod=FXCollections.observableArrayList();
-        String req= " select * from Product ";
+        String req= " select p.nompr,P.descrip,P.prix from Product ";
         Statement st;
         try {
             st=connexion.createStatement();
