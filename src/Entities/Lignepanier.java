@@ -75,7 +75,7 @@ public class Lignepanier {
    
   /*---------------------------------------------------*/  
 
-    public int getIdlp() {
+    public int getId() {
         return idlp;
     }
 
@@ -145,11 +145,7 @@ public class Lignepanier {
 
     
 
-    public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
+    
 
    
 
