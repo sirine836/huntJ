@@ -43,28 +43,38 @@ public class LignePanierService {
     }
 
     public void ajouterLigne2(Lignepanier lp) throws SQLException {
-        String req = "INSERT INTO `ligne_panier` (`product_id`,`panier_id`,`quantite`) VALUES ( ?,?,?) ";
-        PreparedStatement pstm = connexion.prepareStatement(req);
+        String req = "INSERT INTO ligne_panier ( product_id, panier_id , quantite ) VALUES ( ?,?,?) ";
+      try {  PreparedStatement pstm = connexion.prepareStatement(req);
+                  
+
         pstm.setInt(1, lp.getProduct_id());
         pstm.setInt(2, lp.getPanier_id());
         pstm.setInt(3, lp.getQuantite());
         pstm.executeUpdate();
+      } catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    
     public void supprimerLigne(int id) throws SQLException {
-        String req = "DELETE * FROM `ligne_panier` where id= "+id;
-        Statement pstm = connexion.createStatement();
-        pstm.executeUpdate(req);
-        System.out.println("LignePanier Supprimer");
+        String req = "DELETE FROM `ligne_panier` WHERE id=? ";
+        PreparedStatement pstm = connexion.prepareStatement(req);
+        pstm.setInt(1, id);
+        pstm.executeUpdate();
     }
     
     
     public void modifierLigne(int id,int quantite) throws SQLException {
-        String req = "UPDATE `ligne_panier` SET  quantite='"+quantite
-                               + "' WHERE id="+id;
-        Statement pstm = connexion.createStatement();
-       pstm.executeUpdate(req);
-        System.out.println("LignePanier modifier");
+         Statement st;
+        try {
+             st = connexion.createStatement();
+             st.executeUpdate( "UPDATE `ligne_panier` SET  quantite='"+quantite
+                               + "' WHERE id="+id);
+        }   
+        catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
   
 
@@ -87,8 +97,8 @@ public class LignePanierService {
     
       
     
-   public  void rechercheLigne (int quantite) throws SQLException {
-        String req = "select * FROM `ligne_panier` where quantite= '"+quantite+"'";
+   public  void rechercheLigne (int id) throws SQLException {
+        String req = "select * FROM `ligne_panier` where id= ?'";
         Statement pstm = connexion.createStatement();
        ResultSet rst = pstm.executeQuery(req);
        rst.last();
@@ -99,9 +109,9 @@ public class LignePanierService {
     }
     }
     
-    public void increment_qnt(int prodId) throws SQLException{
+    public void increment_qnt(int prodId,int panier) throws SQLException{
         PreparedStatement preparedStatement = null ;
-        String query="update ligne_panier set quantite=quantite+1 WHERE product_id=?";
+        String query="update ligne_panier set quantite=quantite+1 WHERE product_id='"+prodId+"' and panier_id='"+panier+"'";
         Statement pstm = connexion.createStatement();
        pstm.executeUpdate(query);
     }
@@ -114,7 +124,7 @@ public class LignePanierService {
     }
     
     
-  
+
     
     
     public void calcul_total() throws SQLException{
@@ -127,7 +137,7 @@ public class LignePanierService {
     }
 
    public boolean trouve(int id) {    
-        String req= " select p.nompr,P.descrip,P.prix from product p where "+id+"=  p.id ";
+        String req= " select p.nompr,P.descrip,P.prix from ligne_panier l JOIN product p ON "+id+"=  p.id and p.id=l.product_id";
         try {
             Statement pstm = connexion.createStatement();
        ResultSet rst = pstm.executeQuery(req);
@@ -145,10 +155,10 @@ public class LignePanierService {
 
     
     
-    public ObservableList<Lignepanier> indexAction() 
+    public ObservableList<Lignepanier> indexAction(int panierID) 
      { 
         ObservableList<Lignepanier> ligne=FXCollections.observableArrayList();
-        String req= " select p.nompr,P.descrip,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id ";
+        String req= " select p.nompr,P.descrip,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id and panier_id='"+panierID+"'";
         Statement st;
         try {
             st=connexion.createStatement();
