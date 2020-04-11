@@ -11,6 +11,6 @@ package config;
  */
 public class Config {
     
-    public static int currentUser =2;
-     public static int currentpanier=2;
+    public static int currentUser =1;
+     public static int currentpanier=1;
 }
