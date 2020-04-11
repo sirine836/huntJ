@@ -191,7 +191,6 @@ public class MenuController implements Initializable {
       lp.setPanier_id(panier.getIdpan());
       lp.setProduct_id(id_produit);
       lp.setQuantite(1);
-      
       lpService.ajouterLigne2(lp);
       new Alert(Alert.AlertType.INFORMATION, "sucess").show();
         }
