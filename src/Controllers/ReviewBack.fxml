@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="676.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sarra.ReviewBackController">
+   <children>
+      <Separator layoutX="35.0" layoutY="61.0" prefHeight="4.0" prefWidth="252.0" />
+      <Label layoutX="46.0" layoutY="31.0" prefHeight="31.0" prefWidth="341.0" text="Review" textFill="#de8a1d">
+         <font>
+            <Font name="Gill Sans MT" size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableavisback" layoutX="274.0" layoutY="114.0" prefHeight="412.0" prefWidth="521.0">
+        <columns>
+          <TableColumn fx:id="C1" prefWidth="178.0" text="Nom user" />
+          <TableColumn fx:id="C2" minWidth="2.0" prefWidth="203.0" text="Nom Produit" />
+            <TableColumn fx:id="C4" minWidth="2.0" prefWidth="140.0" text="Note" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

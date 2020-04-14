@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="676.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sarra.TroubleShootingController">
+   <children>
+      <JFXButton fx:id="deletbnt" buttonType="RAISED" layoutX="424.0" layoutY="577.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deletbtn" prefHeight="45.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-color: #de8a1d; -fx-background-radius: 0px;" text="DELETE" textFill="WHITE">
+         <font>
+            <Font name="Calibri Light" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon glyphStyle="-fx-fill:#fff" iconName="MINUS_CIRCLE" size="1.5em" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="addbtn" buttonType="RAISED" layoutX="111.0" layoutY="493.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addbtn" prefHeight="45.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-color: #de8a1d; -fx-background-radius: 0px;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="Calibri Light" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon glyphStyle="-fx-fill:#fff" iconName="PLUS_CIRCLE" size="1.5em" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <AnchorPane layoutX="24.0" layoutY="30.0" prefHeight="444.0" prefWidth="423.0">
+         <children>
+            <Separator layoutX="25.0" layoutY="29.0" prefHeight="8.0" prefWidth="289.0" />
+            <JFXTextField fx:id="nomtext" focusColor="#de8a1d" layoutX="102.0" layoutY="109.0" promptText="Nom Produit" />
+            <JFXTextArea fx:id="commentairetxt" focusColor="#de8a1d" layoutX="38.0" layoutY="293.0" maxWidth="318.0" minWidth="318.0" prefHeight="119.0" prefWidth="318.0" promptText="Description du Problème" />
+            <Label layoutX="38.0" layoutY="2.0" prefHeight="31.0" prefWidth="224.0" text="TroubleShooting" textFill="#de8a1d">
+               <font>
+                  <Font name="Gill Sans MT" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="editbtn" buttonType="RAISED" layoutX="702.0" layoutY="577.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#update" prefHeight="45.0" prefWidth="200.0" ripplerFill="WHITE" style="-fx-background-color: #de8a1d; -fx-background-radius: 0px;" text="EDIT" textFill="WHITE">
+         <font>
+            <Font name="Calibri Light" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon glyphStyle="-fx-fill:#fff" iconName="EDIT" size="1.5em" />
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <TableView fx:id="tableprod" layoutX="602.0" layoutY="30.0" onMouseClicked="#select" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="c1" prefWidth="199.0" text="Nom produit" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tablerec" layoutX="475.0" layoutY="269.0" onMouseClicked="#select2" prefHeight="224.0" prefWidth="408.0">
+        <columns>
+          <TableColumn fx:id="C2" prefWidth="135.0" text="Nom produit" />
+            <TableColumn fx:id="C4" prefWidth="176.0" text="Probleme" />
+            <TableColumn fx:id="C5" prefWidth="95.0" text="Etat" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
