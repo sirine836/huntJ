@@ -38,6 +38,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -51,10 +53,11 @@ import javax.swing.JOptionPane;
 public class PanierController implements Initializable {
     
    
-   
     
      @FXML
     private AnchorPane avr;
+     @FXML
+    private Pane firstpane;
 
     @FXML
     private TableView<Lignepanier> table;
@@ -84,20 +87,40 @@ public class PanierController implements Initializable {
     private Button delete;
 
     @FXML
-    private Button comm;
-    
+    private Button btncom;
+   
     @FXML
     private TextField somme;
     
     @FXML
     private Label calc;
     
-  @FXML
+    @FXML
     private TableColumn<Lignepanier,? > id;
     
      public ObservableList<Lignepanier> data = FXCollections.observableArrayList();
   
-   
+    @FXML
+    private void btncom(ActionEvent event) throws IOException {
+         firstpane.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("commander.fxml"));
+        firstpane.getChildren().add(parent);
+        firstpane.toFront();
+    }
+    
+    
+    @FXML
+    private void btndevis(ActionEvent event) {
+    try {
+        javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("devis.fxml"));
+        Scene sceneview = new Scene(tableview);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(sceneview);
+        window.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }  
+    }
     
 
     /**
@@ -122,11 +145,8 @@ public class PanierController implements Initializable {
       PanierService panierService = new PanierService();
          try {
              panier = panierService.getCurrentPanierByUserID(Config.currentUser);
-             System.out.println(Config.currentpanier);
-              System.out.println(String.valueOf(ser.calcul_total(Config.currentpanier)));
             calc.setText(String.valueOf(ser.calcul_total(Config.currentpanier)));
-           
-             
+          
          } catch (SQLException ex) {
              ex.getSQLState();
          }
@@ -135,34 +155,14 @@ public class PanierController implements Initializable {
         table.setItems(data);
         System.out.println(data);
         
-    }    
+    }   
     
-    @FXML
-    private void btncom(ActionEvent event) {
     
-         try {
-        javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("Payment.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
+   
     
-    @FXML
-    private void btndevis(ActionEvent event) {
-    try {
-        javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("devis.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }  
-    }
+       
+         
+    
    
  
     
@@ -212,6 +212,7 @@ public class PanierController implements Initializable {
      @FXML
     private void updateqte(ActionEvent event) throws SQLException {
         LignePanierService l=new LignePanierService();
+        Lignepanier lp=new Lignepanier();
         int qte = 1;
         Lignepanier tableIndex = table.getSelectionModel().getSelectedItem();
         if(table.getSelectionModel().getSelectedItems().size()!=0){
@@ -221,6 +222,7 @@ public class PanierController implements Initializable {
                table.getItems().remove(tableIndex);
                table.refresh();
                table.getSelectionModel().clearSelection();
+          
         }else{
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Information Dialog");
@@ -287,7 +289,13 @@ public class PanierController implements Initializable {
                }else{   
                    l.updateL(table.getSelectionModel().getSelectedItems().get(0).getIdlp(),Integer.parseInt(name));
                              LignePanierService ser = new LignePanierService();
-       
+                               if(Integer.parseInt(name) <=0)
+           { l.deleteL(table.getSelectionModel().getSelectedItems().get(0).getIdlp());
+           calc.setText(String.valueOf(ser.calcul_total(Config.currentpanier)));
+               table.getItems().remove(tableIndex);
+               table.refresh();
+               table.getSelectionModel().clearSelection();
+           }       
                               nompr.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("nompr"));
                               descrip.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("descrip"));
                               prix.setCellValueFactory(new PropertyValueFactory<Lignepanier,Double>("prix"));

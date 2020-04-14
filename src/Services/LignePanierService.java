@@ -43,10 +43,8 @@ public class LignePanierService {
     }
 
     public void ajouterLigne2(Lignepanier lp) throws SQLException {
-        String req = "INSERT INTO ligne_panier ( product_id, panier_id , quantite ) VALUES ( ?,?,?) ";
+        String req = "INSERT INTO ligne_panier ( product_id, panier_id , quantite ) VALUES (?,?,?) ";
       try {  PreparedStatement pstm = connexion.prepareStatement(req);
-                  
-
         pstm.setInt(1, lp.getProduct_id());
         pstm.setInt(2, lp.getPanier_id());
         pstm.setInt(3, lp.getQuantite());
@@ -56,21 +54,21 @@ public class LignePanierService {
         }
     }
     
-    
-    public void supprimerLigne(int id) throws SQLException {
+ 
+    public void deleteL(int idlp) throws SQLException {
         String req = "DELETE FROM `ligne_panier` WHERE id=? ";
         PreparedStatement pstm = connexion.prepareStatement(req);
-        pstm.setInt(1, id);
+        pstm.setInt(1, idlp);
         pstm.executeUpdate();
     }
     
     
-    public void modifierLigne(int id,int quantite) throws SQLException {
+    public void updateL(int idlp,int quantite) throws SQLException {
          Statement st;
         try {
              st = connexion.createStatement();
              st.executeUpdate( "UPDATE `ligne_panier` SET  quantite='"+quantite
-                               + "' WHERE id="+id);
+                               + "' WHERE id="+idlp);
         }   
         catch (SQLException ex) {
             Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,6 +90,27 @@ public class LignePanierService {
         
         return ligne;
     }
+    
+    
+    
+    public ObservableList<Lignepanier> getAllnomLignes(int panierID) 
+     { 
+        ObservableList<Lignepanier> ligne=FXCollections.observableArrayList();
+        String req= " select l.nompr,l.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id and panier_id='"+panierID+"'";
+        Statement st;
+        try {
+            st=connexion.createStatement();
+            ResultSet result=st.executeQuery(req);
+            while(result.next())
+            {    Lignepanier p = new Lignepanier(result.getString("nompr"),result.getDouble("prix"),result.getInt("quantite"));
+            ligne.add(p);
+                    }
+        } catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("rrrr");
+        }
+          return  ligne;
+     }
     
   /*---------------autre methode------------------*/  
     
@@ -127,17 +146,21 @@ public class LignePanierService {
 
     
     
-    public void calcul_total() throws SQLException{
-            String query="SELECT sum(p.prix*quantite) as total FROM ligne_panier l JOIN product p ON p.id = l.product_id";
+    public double calcul_total(int panierID) throws SQLException{
+            String query="SELECT sum(p.prix*quantite) as total FROM ligne_panier l JOIN product p ON p.id = l.product_id and panier_id='"+panierID+"'" ;
             ResultSet rs =connexion.createStatement().executeQuery(query);
             while(rs.next()){
             int totalamount=rs.getInt("total");
-                System.out.println(totalamount);
+                return totalamount;
+                
             }
+       return 0;
     }
 
+    
+    
    public boolean trouve(int id) {    
-        String req= " select p.nompr,P.descrip,P.prix from ligne_panier l JOIN product p ON "+id+"=  p.id and p.id=l.product_id";
+        String req= " select l.id,p.nompr,P.descrip,P.prix from ligne_panier l JOIN product p ON "+id+"=  p.id and p.id=l.product_id";
         try {
             Statement pstm = connexion.createStatement();
        ResultSet rst = pstm.executeQuery(req);
@@ -152,19 +175,20 @@ public class LignePanierService {
         }
           return  false;
      }
+   
 
     
     
     public ObservableList<Lignepanier> indexAction(int panierID) 
      { 
         ObservableList<Lignepanier> ligne=FXCollections.observableArrayList();
-        String req= " select p.nompr,P.descrip,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id and panier_id='"+panierID+"'";
+        String req= " select l.id,p.nompr,P.descrip,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id and panier_id='"+panierID+"'";
         Statement st;
         try {
             st=connexion.createStatement();
             ResultSet result=st.executeQuery(req);
             while(result.next())
-            {    Lignepanier p = new Lignepanier(result.getString("nompr"),result.getString("descrip"),result.getDouble("prix"),result.getInt("quantite"));
+            {    Lignepanier p = new Lignepanier(result.getInt("id"),result.getString("nompr"),result.getString("descrip"),result.getDouble("prix"),result.getInt("quantite"));
             ligne.add(p);
                     }
         } catch (SQLException ex) {
@@ -174,7 +198,24 @@ public class LignePanierService {
           return  ligne;
      }
 
-    
+    public ObservableList<Lignepanier> indexActiondevis(int panierID) 
+     { 
+        ObservableList<Lignepanier> ligne=FXCollections.observableArrayList();
+        String req= " select l.id,p.nompr,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id and panier_id='"+panierID+"'";
+        Statement st;
+        try {
+            st=connexion.createStatement();
+            ResultSet result=st.executeQuery(req);
+            while(result.next())
+            {    Lignepanier p = new Lignepanier(result.getInt("id"),result.getString("nompr"),result.getDouble("prix"),result.getInt("quantite"));
+            ligne.add(p);
+                    }
+        } catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("rrrr");
+        }
+          return  ligne;
+     }
 
    
 }

@@ -78,6 +78,25 @@ public class devisController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+         LignePanierService ser = new LignePanierService();
+       Lignepanier l= new Lignepanier();
+    nompr.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("nompr"));
+    prix.setCellValueFactory(new PropertyValueFactory<Lignepanier,Double>("prix"));
+    quantite.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("quantite"));
+      
+    nompr.setStyle("-fx-alignment: CENTER;");
+    prix.setStyle("-fx-alignment: CENTER;");
+    quantite.setStyle("-fx-alignment: CENTER;");
+        try {
+            calc.setText(String.valueOf(ser.calcul_total(Config.currentpanier)));
+        } catch (SQLException ex) {
+            Logger.getLogger(devisController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        data =ser.indexActiondevis(Config.currentpanier);
+        System.out.println("aaaaa"+data);
+        tabled.setItems(data);
+        System.out.println(data);
 
     }  
     
@@ -95,23 +114,7 @@ public class devisController implements Initializable {
         }  
     }
     
-    @FXML
-    private void aff(ActionEvent event) throws IOException {
-      LignePanierService ser = new LignePanierService();
-       Lignepanier l= new Lignepanier();
-    nompr.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("nompr"));
-    prix.setCellValueFactory(new PropertyValueFactory<Lignepanier,Double>("prix"));
-    quantite.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("quantite"));
-      
-    nompr.setStyle("-fx-alignment: CENTER;");
-    prix.setStyle("-fx-alignment: CENTER;");
-    quantite.setStyle("-fx-alignment: CENTER;");
-    
-        data =ser.indexActiondevis(l.getPanier_id());
-        System.out.println(data);
-        tabled.setItems(data);
-        System.out.println(data);
-}
+
     
    
     }    

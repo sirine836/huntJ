@@ -23,7 +23,26 @@ public class Facture {
     public Facture() {
     }
 
-    public Facture(int idfact, int panier_id, String adresse, String numtel, String datedelivraison, int etat) {
+    public Facture(String numtel,String adresse,String datedelivraison) {
+        this.adresse = adresse;
+        this.datedelivraison = datedelivraison;
+        this.numtel = numtel;
+      
+    }
+    
+    public Facture(String numtel,String adresse,String datedelivraison,int etat) {
+        this.adresse = adresse;
+        this.datedelivraison = datedelivraison;
+        this.numtel = numtel;
+        this.etat = etat;
+      
+    }
+
+   
+    
+    
+
+    public Facture(int idfact, int panier_id,String numtel, String adresse,  String datedelivraison, int etat) {
         this.idfact = idfact;
         this.panier_id = panier_id;
         this.adresse = adresse;
@@ -34,11 +53,6 @@ public class Facture {
 
    
 
-    public Facture(String adresse, String numtel, int etat) {
-        this.adresse = adresse;
-        this.numtel = numtel;
-        this.etat = etat;
-    }
 
    
 

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="avr" cache="true" cacheHint="ROTATE" prefHeight="746.0" prefWidth="939.0" styleClass="parent" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
+   <children>
+      <ScrollPane prefHeight="839.0" prefWidth="943.0">
+               <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="856.0" prefWidth="933.0" style="-fx-background-color: white;">
+                     <children>
+                        <SplitPane layoutX="47.0" layoutY="39.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="159.0" fitWidth="155.0" layoutX="16.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/mallette-transport-x100-cartouches-4-boites-25-cartouches-cal-12-70.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="8.0" layoutY="139.0" prefHeight="24.0" prefWidth="175.0" text="MALLETTE TRANSPORT ">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="54.0" layoutY="169.0" prefHeight="21.0" prefWidth="82.0" text="Prix :  50 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <JFXButton fx:id="btn1" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart1" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <SplitPane layoutX="275.0" layoutY="39.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="139.0" fitWidth="138.0" layoutX="22.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/sac-a-dos-chasse-20-litres-camouflage-island-vert.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <JFXButton fx:id="btn2" buttonType="RAISED" layoutX="40.0" layoutY="195.0" onAction="#addToCart2" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                              <Label alignment="CENTER" layoutX="8.0" layoutY="139.0" prefHeight="24.0" prefWidth="175.0" text="Sac A Dos" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="54.0" layoutY="169.0" prefHeight="21.0" prefWidth="82.0" text="Prix :  40 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="503.0" layoutY="39.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="147.0" fitWidth="200.0" layoutX="19.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/cartouchiere-chasse-calibre-12-camouflage-marron.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="16.0" layoutY="137.0" prefHeight="30.0" prefWidth="161.0" text="Cartouchière Chasse">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="56.0" layoutY="169.0" prefHeight="17.0" prefWidth="78.0" text="Prix : 30 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn3" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart3" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="719.0" layoutY="39.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="147.0" fitWidth="200.0" layoutX="18.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                       <image>
+                                          <Image url="@../Images/jumelles-8x25-sans-reglage.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="11.0" layoutY="137.0" prefHeight="30.0" prefWidth="164.0" text="JUMELLES 8x25 " textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="53.0" layoutY="169.0" prefHeight="21.0" prefWidth="90.0" text="Prix : 100 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn4" buttonType="RAISED" layoutX="43.0" layoutY="195.0" onAction="#addToCart4" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="47.0" layoutY="306.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="135.0" fitWidth="139.0" layoutX="17.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/sac-a-dos-chasse-x-access-45-litres-compact-vert.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="12.0" layoutY="139.0" prefHeight="30.0" prefWidth="165.0" text="SAC A DOS CHASSE ">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="51.0" layoutY="169.0" prefHeight="21.0" prefWidth="89.0" text="Prix : 200 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn5" buttonType="RAISED" layoutX="37.0" layoutY="195.0" onAction="#addToCart5" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="275.0" layoutY="306.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="139.0" fitWidth="144.0" layoutX="22.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/trepied-chasse-telescopique-camouflage-marron.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="27.0" layoutY="139.0" prefHeight="30.0" prefWidth="147.0" text="Trépied Chasse">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="55.0" layoutY="169.0" prefHeight="21.0" prefWidth="80.0" text="Prix : 80 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn6" buttonType="RAISED" layoutX="38.0" layoutY="195.0" onAction="#addToCart6" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="503.0" layoutY="306.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="147.0" fitWidth="200.0" layoutX="19.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/fusil-arbalete-chasse-sous-mar-20160415155715.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="26.0" layoutY="139.0" prefHeight="30.0" prefWidth="135.0" text="Fusil arbaléte">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="52.0" layoutY="169.0" prefHeight="21.0" prefWidth="85.0" text="Prix : 300 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn7" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart7" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="719.0" layoutY="306.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="158.0" fitWidth="211.0" layoutX="-15.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/fusildarne.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="7.0" layoutY="139.0" prefHeight="30.0" prefWidth="163.0" text="Fusil DARNE">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="48.0" layoutY="169.0" prefHeight="21.0" prefWidth="88.0" text="Prix : 400 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn8" buttonType="RAISED" layoutX="40.0" layoutY="195.0" onAction="#addToCart8" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="55.0" layoutY="586.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="141.0" fitWidth="162.0" layoutX="22.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/veste%20de%20combi.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="18.0" layoutY="138.0" prefHeight="30.0" prefWidth="156.0" text="Veste de combinaison">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="54.0" layoutY="169.0" prefHeight="17.0" prefWidth="83.0" text="Prix : 450 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn9" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart9" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="719.0" layoutY="586.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="147.0" fitWidth="200.0" layoutX="18.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/devidoir_45_m_aquatys-16639-1.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="14.0" layoutY="139.0" prefHeight="30.0" prefWidth="158.0" text="Dévidoir">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="57.0" layoutY="169.0" prefHeight="17.0" prefWidth="76.0" text="Prix : 90 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn12" buttonType="RAISED" layoutX="42.0" layoutY="195.0" onAction="#addToCart10" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="503.0" layoutY="586.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="175.0" fitWidth="227.0" layoutX="7.0" layoutY="-30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/goemon_black.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="21.0" layoutY="139.0" prefHeight="30.0" prefWidth="145.0" text="Couteau Salvimar">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="59.0" layoutY="169.0" prefHeight="21.0" prefWidth="76.0" text="Prix : 35 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                                    <JFXButton fx:id="btn11" buttonType="RAISED" layoutX="43.0" layoutY="195.0" onAction="#addToCart11" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                        <SplitPane layoutX="275.0" layoutY="586.0" orientation="VERTICAL" prefHeight="236.0" prefWidth="191.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="189.0">
+                                 <children>
+                                    <ImageView fitHeight="70.0" fitWidth="227.0" layoutX="-4.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/fusil-occasion-chapuis-juxtapose-becassier-1024x240.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="9.0" layoutY="139.0" prefHeight="30.0" prefWidth="163.0" text="Fusil">
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="52.0" layoutY="169.0" prefHeight="21.0" prefWidth="98.0" text="Prix : 1000 DT">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                                    <JFXButton fx:id="btn10" buttonType="RAISED" layoutX="43.0" layoutY="195.0" onAction="#addToCart12" style="-fx-background-color: #5DADE2;" text="Ajouter au panier" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                       
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+   
+   </children>
+</AnchorPane>

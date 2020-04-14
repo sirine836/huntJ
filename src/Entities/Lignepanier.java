@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import javafx.scene.control.TableColumn;
+
 /**
  *
  * @author gogo-
@@ -27,7 +29,8 @@ public class Lignepanier {
         this.nompr = nompr;
     }
 
-    public Lignepanier( String nompr, String descrip, double prix, int quantite) {
+    public Lignepanier( int idlp,String nompr, String descrip, double prix, int quantite) {
+         this.idlp = idlp;
         this.quantite = quantite;
         this.nompr = nompr;
         this.descrip = descrip;
@@ -36,15 +39,17 @@ public class Lignepanier {
     
     
 
-    public Lignepanier(int idlp, String nompr, int quantite) {
+    public Lignepanier(int idlp, String nompr, double prix, int quantite) {
         this.idlp = idlp;
         this.quantite = quantite;
         this.nompr = nompr;
+        this.prix = prix;
     }
 
-    public Lignepanier( String nompr, int quantite) {
-        this.quantite = quantite;
+    public Lignepanier( String nompr, double prix, int quantite) {
+       this.prix = prix;
         this.nompr = nompr;
+         this.quantite = quantite;
     }
     
     
@@ -70,6 +75,7 @@ public class Lignepanier {
         this.quantite = quantite;
     }
 
+   
    
 
    
@@ -141,6 +147,7 @@ public class Lignepanier {
         return "Lignepanier{" + "idlp=" + idlp + ", product_id=" + product_id + ", panier_id=" + panier_id + ", quantite=" + quantite + ", nompr=" + nompr + ", descrip=" + descrip + ", prix=" + prix + '}';
     }
 
+    
     
 
     

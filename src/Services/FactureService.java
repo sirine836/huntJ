@@ -41,14 +41,17 @@ public class FactureService {
     }
 
     public void ajouterFacture2(Facture f) throws SQLException {
-        String req = "INSERT INTO `facture` (`panier_id`,`adresse`, `dateDeLivraison`,`numtel`,`etat`) VALUES (?,?,?,?,?) ";
-        PreparedStatement pstm = connexion.prepareStatement(req);
-        pstm.setInt(1, f.getPanier_id());
-        pstm.setString(2, f.getAdresse());
-        pstm.setString(3, f.getDatedelivraison());
-        pstm.setString(4, f.getNumtel());
-        pstm.setInt(5, f.getEtat());
-        pstm.executeUpdate();
+        String req = "INSERT INTO `facture` (`panier_id`,`numtel`,`adresse`, `dateDeLivraison`,`etat`) VALUES (?,?,?,?,0) ";
+        try {PreparedStatement pstm = connexion.prepareStatement(req);
+        pstm.setInt(1, f.getPanier_id());   
+        pstm.setString(2, f.getNumtel());
+        pstm.setString(3, f.getAdresse());
+        pstm.setString(4, f.getDatedelivraison());
+        
+         pstm.executeUpdate();
+      } catch (SQLException ex) {
+            Logger.getLogger(LignePanierService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void supprimerFacture(int id) throws SQLException {
