@@ -13,4 +13,5 @@ public class Config {
     
     public static int currentUser =1;
      public static int currentpanier=1;
+    public static String userMail="cyrine.benhajsalem@esprit.tn";
 }

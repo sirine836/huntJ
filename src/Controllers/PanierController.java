@@ -103,7 +103,7 @@ public class PanierController implements Initializable {
     @FXML
     private void btncom(ActionEvent event) throws IOException {
          firstpane.getChildren().clear();
-        Parent parent = FXMLLoader.load(getClass().getResource("commander.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("paiement.fxml"));
         firstpane.getChildren().add(parent);
         firstpane.toFront();
     }
