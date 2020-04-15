@@ -41,7 +41,7 @@ public class FactureService {
     }
 
     public void ajouterFacture2(Facture f) throws SQLException {
-        String req = "INSERT INTO `facture` (`panier_id`,`numtel`,`adresse`, `dateDeLivraison`,`etat`) VALUES (?,?,?,?,0) ";
+        String req = "INSERT INTO `facture` (`panier_id`,`numtel`,`adresse`, `dateDeLivraison`,`etat`) VALUES (?,?,?,?,1) ";
         try {PreparedStatement pstm = connexion.prepareStatement(req);
         pstm.setInt(1, f.getPanier_id());   
         pstm.setString(2, f.getNumtel());
