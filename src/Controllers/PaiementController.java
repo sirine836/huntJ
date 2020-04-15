@@ -91,14 +91,7 @@ public class PaiementController implements Initializable {
     public DatePicker date;
     @FXML
     private AnchorPane anc;
-    @FXML
-    private Label openHomeBtn;
-    @FXML
-    private Label openPanierBtn;
-    @FXML
-    private Label openStoreBtn;
-    @FXML
-    private Label openCommandeBtn;
+   
     @FXML
     private JFXTextField numeroCarte;
     @FXML
@@ -309,7 +302,7 @@ public class PaiementController implements Initializable {
 
 
     @FXML
-    public void validerFunction(ActionEvent event) throws SQLException, IOException {
+    private void btnValider(javafx.event.ActionEvent event) throws IOException, SQLException {
         
         try {
             int mois = Integer.parseInt(MoisValidite.getText());
@@ -402,7 +395,7 @@ public class PaiementController implements Initializable {
     }
 
     @FXML
-    public void AnnulerFunction(ActionEvent event) {
+     private void btnAnnuler(javafx.event.ActionEvent event) throws IOException, SQLException{
         try {
            firstpane.getChildren().clear();
         Parent parent = FXMLLoader.load(getClass().getResource("panier.fxml"));
