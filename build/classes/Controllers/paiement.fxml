@@ -107,7 +107,7 @@
 </font>
 </JFXButton>
 
-             <JFXButton layoutX="454.0" layoutY="462.0" prefHeight="44.0" prefWidth="149.0" style="-fx-background-color: #fcc511;" text="Annuler">
+             <JFXButton fx:id="btnAnnuler" layoutX="454.0" layoutY="462.0" onAction="#AnnulerFunction" prefHeight="44.0" prefWidth="149.0" style="-fx-background-color: #fcc511;" text="Annuler">
                     <font>
 <Font size="20.0" />
 </font>

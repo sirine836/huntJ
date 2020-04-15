@@ -18,6 +18,7 @@ import com.stripe.model.Charge;
 import com.stripe.model.Token;
 import config.Config;
 import static config.Config.currentUser;
+import static config.Config.userMail;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -226,7 +227,7 @@ public class PaiementController implements Initializable {
             
 
     @FXML
-    private void AnnulerFunction(ActionEvent event) throws IOException {
+    private void AnnulerFunction(javafx.event.ActionEvent event) throws IOException, SQLException{
         
       try {
            firstpane.getChildren().clear();
@@ -253,9 +254,22 @@ public class PaiementController implements Initializable {
              panier = panierService.getCurrentPanierByUserID(Config.currentUser);
             System.out.println("payment controller : " + panier);
 
-            
-
-            if (tel.getText().length() != 8) {
+            if (tel.getText().length() == 0 || tel.getText().length() == 0 ||
+                numeroCarte.getText().length()==0 ) 
+      {   Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("Information Dialog");
+          alert.setHeaderText(null);
+          alert.setContentText("tous les champs doivent être remplis");
+          alert.showAndWait();
+           
+      } else if (isNotInteger(tel.getText()) ) {
+        Alert alert1 = new Alert(Alert.AlertType.WARNING);
+        alert1.setTitle("Erreur");
+        alert1.setContentText("num doivent etre composer de des chiffres");
+        alert1.setHeaderText(null);
+        alert1.show();
+        
+        }else  if (tel.getText().length() != 8) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
@@ -263,14 +277,14 @@ public class PaiementController implements Initializable {
                 alert.setHeaderText(null);
                 alert.showAndWait();
 
-            } else if (address.getText().length() < 5) {
+        } else if (address.getText().length() < 5) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
                 alert.setContentText("adresse incorrecte !");
                 alert.setHeaderText(null);
                 alert.showAndWait();
             } else {
-                btnpay();
+               
 
                  Token token = StripePayment.getToken("pk_test_nBZ1PBy1Q0GzbbioWDBJqxv200SDGaJUNq", numeroCarte.getText(), mois, annee, ccvTextField.getText(), Config.userMail);
 
@@ -284,31 +298,13 @@ public class PaiementController implements Initializable {
                     String message = "Votre paiement a été traité avec succès";
                     System.out.println(message);
                 
-//            NotificationType notification = NotificationType.SUCCESS;
-
-//            TrayNotification tray = new TrayNotification(tit, message, notification);          
-//            tray.setAnimationType(AnimationType.POPUP);
-//            tray.showAndDismiss(javafx.util.Duration.seconds(2));
-//        HomeController.afficherprofile=1;
-//        ProfileController.affichercommandes=1;
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Achat/Views/Commande.fxml"));
-//        AnchorPane root = (AnchorPane) loader.load();
-//         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//         stage.setScene(new Scene(loader));
-//         stage.setTitle("Panier");
-//       sendEmail();
-//        email.getScene().setRoot(root);
-//      t3ayet lel fonction showCommande ta3 controller le5er
-                    /*commander();*/
+                  btnpay();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Success");
                     alert.setContentText("Votre Commande est en Cours de traitement !");
                     alert.setHeaderText(null);
                     alert.showAndWait();
-                    Parent commandePage = FXMLLoader.load(getClass().getResource("/Achat/Views/Commande.fxml"));
-                    anc.getChildren().clear();
-                    anc.getChildren().add(commandePage);
-                    anc.toFront();
+                    
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -332,125 +328,7 @@ public class PaiementController implements Initializable {
     }
          
     
-    
-    
    
-/*
-
-    public void commander() throws IOException, SQLException {
-
-//        FXMLLoader userLoader = new FXMLLoader(getClass().getResource("/Khrouf/Views/User.fxml"));
-//        Parent root = (Parent)userLoader.load();
-//        UserController userController =  userLoader.getController();
-//        User currentUser = userController.getConnectedUser();
-        PanierService pans = new PanierService();
-
-//      TODO replace UserID
-//      Panier panier = pans.getPanierByUser(User.getId());
-        Panier panier = pans.getCurrentPanierByUserID(Config.currentUser);
-
-     /*   FXMLLoader commandeLoader = new FXMLLoader(getClass().getResource("/Achat/Views/Commande.fxml"));
-        Parent root = (Parent) commandeLoader.load();
-        CommandeController commandeController = commandeLoader.getController();
-
-        commandeController.ajouterCommande(panier, address.getText(), tel.getText());
-        System.out.println("ajouterCommande is called");
-        tgt.Entities.SendEmailTLS.sendCommandeConfrimationMail(userMail,panier);*/
-
-/*
-    }
-
-    
-
-    @FXML
-    private void btnValider(ActionEvent event) throws SQLException, IOException {
-        try {
-           int mois = Integer.parseInt(MoisValidite.getText());
-            int annee = Integer.parseInt(AnneeValidite.getText());
-            PanierService pans = new PanierService();
-/*
-//      TODO replace UserID
-//      Panier panier = pans.getPanierByUser(User.getId());
-            Panier panier = pans.getCurrentPanierByUserID(currentUser);
-            System.out.println("payment controller : " + panier);
-
-            
-
-            if (tel.getText().length() != 8) {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setContentText("numero Tel incorrect !");
-                alert.setHeaderText(null);
-                alert.showAndWait();
-
-            } else if (address.getText().length() < 5) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setContentText("adresse incorrecte !");
-                alert.setHeaderText(null);
-                alert.showAndWait();
-            } else {
-
-                Token token = StripePayment.getToken("pk_test_VkxHIqxNUhztx7sLrBe14vNu00HVIf29N2", numeroCarte.getText(), mois, annee, ccvTextField.getText(), Config.userMail);
-
-                if (token != null) {
-//                TODO change amount by the real Panier Prix Total
-//                TODO change UserMail By Real User mail
-                    Double amount =  ser.calcul_total(Config.currentpanier);
-
-                    Charge ch = StripePayment.ChargePayement("rk_test_oGfrFNOjpnRPklUVzjelPHgf", "usd", "tok_visa", amount, "sk_test_lE9pTHIXFMFcZr7CZvTS33wM00fIb8c2WL", numeroCarte.getText(), mois, annee, ccvTextField.getText(), Config.userMail);
-                    String tit = "Paiement réussi";
-                    String message = "Votre paiement a été traité avec succès";
-                    System.out.println(message);
-//            NotificationType notification = NotificationType.SUCCESS;
-
-//            TrayNotification tray = new TrayNotification(tit, message, notification);          
-//            tray.setAnimationType(AnimationType.POPUP);
-//            tray.showAndDismiss(javafx.util.Duration.seconds(2));
-//        HomeController.afficherprofile=1;
-//        ProfileController.affichercommandes=1;
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Achat/Views/Commande.fxml"));
-//        AnchorPane root = (AnchorPane) loader.load();
-//         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//         stage.setScene(new Scene(loader));
-//         stage.setTitle("Panier");
-//       sendEmail();
-//        email.getScene().setRoot(root);
-//      t3ayet lel fonction showCommande ta3 controller le5er
-                    commander();
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success");
-                    alert.setContentText("Votre Commande est en Cours de traitement !");
-                    alert.setHeaderText(null);
-                    alert.showAndWait();
-                    Parent commandePage = FXMLLoader.load(getClass().getResource("/Achat/Views/Commande.fxml"));
-                    anc.getChildren().clear();
-                    anc.getChildren().add(commandePage);
-                    anc.toFront();
-
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Alert");
-                    alert.setContentText("carte invalide !");
-                    alert.setHeaderText(null);
-                    alert.showAndWait();
-                }
-            }
-
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alert");
-            alert.setContentText("carte invalide !");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-        }
-
-
-    }
-
- 
-*/
            
           
           
@@ -488,11 +366,7 @@ public class PaiementController implements Initializable {
         firstpane.getChildren().add(parent);
         firstpane.toFront();
     }
-    
-    
-    
-   
-
+ 
     @FXML
     private void logout(MouseEvent event) throws IOException {
     }
