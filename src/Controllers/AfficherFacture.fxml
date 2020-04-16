@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="firstpane" cache="true" cacheHint="ROTATE" prefHeight="676.0" prefWidth="1000.0" styleClass="parent" stylesheets="@../CSS/stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AfficherFactureController">
+   <children>
+       <AnchorPane id="AnchorPane" cache="true" cacheHint="ROTATE" layoutX="10.0" layoutY="10.0" prefHeight="655.0" prefWidth="978.0" style="-fx-background-color: #e77840;">
+   <children>   
+      <AnchorPane layoutX="50.0" layoutY="45.0" prefHeight="565.0" prefWidth="878.0" style="-fx-background-color: white;">
+         <children>
+     
+            <Label fx:id="calc" alignment="CENTER" layoutX="438.0" layoutY="463.0" prefHeight="36.0" prefWidth="99.0" text="0" textFill="#ee0c0c">
+               <font>
+                  <Font name="Microsoft YaHei Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="289.0" layoutY="461.0" prefHeight="39.0" prefWidth="149.0" text="Montant Total :" textFill="#252121">
+               <font>
+                  <Font name="SansSerif Bold" size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="backImageV" layoutX="58.0" layoutY="450.0" onAction="#backImageV" prefHeight="77.0" prefWidth="109.0" text="." />
+            <ImageView fitHeight="65.0" fitWidth="66.0" layoutX="70.0" layoutY="452.0">
+               <image>
+                  <Image url="@../Images/Back_Arrow.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="calc1" alignment="CENTER" layoutX="545.0" layoutY="462.0" prefHeight="36.0" prefWidth="55.0" text="DT" textFill="#ee0c0c">
+               <font>
+                  <Font name="Microsoft YaHei" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="269.0" fitWidth="292.0" layoutX="-31.0" layoutY="-54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/thunt.png" />
+               </image>
+            </ImageView>
+            <Line endX="431.0" layoutX="168.0" layoutY="451.0" startX="110.0" />
+            <TableView id="tablef" fx:id="tablef" layoutX="227.0" layoutY="102.0" prefHeight="322.0" prefWidth="424.0" style="-fx-background-color: #fff2ac;">
+              <columns>
+                <TableColumn fx:id="numf" prefWidth="111.0" text="Numéro Facture" />
+                <TableColumn fx:id="adresse" prefWidth="116.0" text="Adresse" />
+                  <TableColumn fx:id="date" prefWidth="127.0" text="Date de livraison" />
+                        <TableColumn fx:id="etat" prefWidth="75.0" text="Etat" />
+              </columns>
+            </TableView>
+                  <ImageView fitHeight="89.0" fitWidth="66.0" layoutX="723.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/telecharger%20pdf.jpg" />
+                     </image>
+                  </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+    
+</AnchorPane>
+</children>   
+</AnchorPane>

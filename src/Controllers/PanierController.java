@@ -88,6 +88,11 @@ public class PanierController implements Initializable {
 
     @FXML
     private Button btncom;
+    
+    @FXML
+    private JFXButton btnfacture;
+    @FXML
+    private JFXButton btndevis;
    
     @FXML
     private TextField somme;
@@ -110,13 +115,24 @@ public class PanierController implements Initializable {
     
     
     @FXML
+    private void btnfacture(ActionEvent event) {
+    try {
+        firstpane.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("AfficherFacture.fxml"));
+        firstpane.getChildren().add(parent);
+        firstpane.toFront();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }  
+    }
+    
+    @FXML
     private void btndevis(ActionEvent event) {
     try {
-        javafx.scene.Parent tableview = FXMLLoader.load(getClass().getResource("devis.fxml"));
-        Scene sceneview = new Scene(tableview);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(sceneview);
-        window.show();
+        firstpane.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("devis.fxml"));
+        firstpane.getChildren().add(parent);
+        firstpane.toFront();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }  
@@ -278,7 +294,7 @@ public class PanierController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning Dialog");
                     alert.setHeaderText(null);
-                    alert.setContentText("Veuillez saisir la quantité!");
+                    alert.setContentText("Entrer la quantité demander :");
                     alert.show();
                } else if (isNotInteger(name)){
                     Alert alert1 = new Alert(Alert.AlertType.WARNING);

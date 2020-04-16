@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import java.text.SimpleDateFormat;
+
 
 
 /**
@@ -47,6 +49,19 @@ public class Panier {
         this.etat = etat;
         this.archive = archive;
         this.prixtotal = prixtotal;
+    }
+
+    public Panier(int user, String datepanier) {
+       this.user = user;
+       this.datepanier = datepanier;
+    }
+
+    public Panier(int currentUser, SimpleDateFormat formater) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Panier(int user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   
@@ -115,6 +130,10 @@ public class Panier {
     @Override
     public String toString() {
         return "Panier{" + "idpan=" + idpan + ", user=" + user + ", etat=" + etat + ", archive=" + archive + ", datepanier=" + datepanier + ", prixtotal=" + prixtotal + '}';
+    }
+
+    public void updateP(int currentpanier, int currentUser, double calcul_total) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

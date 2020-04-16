@@ -41,7 +41,7 @@ public class PanierService {
         stm.executeUpdate(req);
     }
 
-    void ajouterPanier2(Panier p) throws SQLException {
+    public void ajouterPanier2(Panier p) throws SQLException {
         String req = "INSERT INTO `panier` (`user`,`datePanier`, `etat`,`archive`, `prixTotal`)  VALUES ( ?, ?,?,?,?) ";
         PreparedStatement pstm = connexion.prepareStatement(req);
         pstm.setInt(1, p.getUser());
@@ -59,6 +59,32 @@ public class PanierService {
         System.out.println("Panier Supprimer");
     }
     
+     public void updatePanierinit(int idp,int user_id) throws SQLException {
+         Statement st;
+        try {
+             st = connexion.createStatement();
+             st.executeUpdate( "UPDATE `panier` SET  etat='"+0+ "', archive='"+1
+                               + "' WHERE user ='"+user_id
+                               +"'and id=(SELECT panier_id FROM `facture` WHERE  panier_id='"+1+"')");
+        }   
+        catch (SQLException ex) {
+            Logger.getLogger(PanierService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     public void updatePan(int idp,int user_id,double prixtot) throws SQLException {
+         Statement st;
+        try {
+             st = connexion.createStatement();
+             st.executeUpdate( "UPDATE `panier` SET  etat='"+1+ "', archive='"+1
+                               + "', prixTotal='"+prixtot+ "' WHERE user ='"+user_id
+                               +"'and id=(SELECT panier_id FROM `facture` WHERE etat='"+1
+                               +"' and panier_id='"+1+"')");
+        }   
+        catch (SQLException ex) {
+            Logger.getLogger(PanierService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     void modifierPanier(int idpan, String datepanier, int etat, int archive, double prixTotal) throws SQLException {
         String req = "UPDATE `panier` SET  datepanier='"+datepanier

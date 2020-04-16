@@ -7,6 +7,7 @@ package Services;
 
 
 import Entities.Facture;
+import Entities.Lignepanier;
 import Utils.MyDbConnection;
 import java.sql.Connection;
 import java.sql.Date;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -62,12 +65,12 @@ public class FactureService {
     }
     
     
-    public void modifierFacture(int id,int panier_id,String adresse,String numtel,int etat) throws SQLException {
-        String req = "UPDATE `facture` SET  panier_id='"+panier_id
-                               +"',adresse='"+adresse
+    public void modifierFacture(int id,int panier_id,String adresse,String numtel,String date,int etat) throws SQLException {
+        String req = "UPDATE `facture` SET  adresse='"+adresse
                                +"', numtel='"+numtel
-                               +"', etat='"+etat
-                               + "' WHERE id="+id;
+                               +"', dateDeLivraison='"+date
+                               +"', etat='"+1
+                               + "' WHERE panier_id="+panier_id;
         System.out.println(req);
         Statement pstm = connexion.createStatement();
        pstm.executeUpdate(req);
@@ -101,5 +104,26 @@ public class FactureService {
         
         return Factures;
     }
+    
+    
+    
+    public ObservableList<Facture> indexActionfacture(int panierID) 
+     { 
+        ObservableList<Facture> fact=FXCollections.observableArrayList();
+        String req= " select f.id,f.adresse,f.dateDeLivraison ,f.etat from panier p JOIN facture f ON p.id = f.panier_id and f.panier_id='"+panierID+"'";
+        Statement st;
+        try {
+            st=connexion.createStatement();
+            ResultSet result=st.executeQuery(req);
+            while(result.next())
+            {    Facture p = new Facture(result.getString("id"),result.getString("adresse"),result.getString("dateDeLivraison"),result.getInt("etat"));
+            fact.add(p);
+                    }
+        } catch (SQLException ex) {
+            Logger.getLogger(FactureService.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("rrrr");
+        }
+          return  fact;
+     }
 
 }

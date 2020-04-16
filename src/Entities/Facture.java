@@ -22,6 +22,10 @@ public class Facture {
 
     public Facture() {
     }
+    
+    public Facture(int panier_id) {
+        this.panier_id = panier_id;
+    }
 
     public Facture(String numtel,String adresse,String datedelivraison) {
         this.adresse = adresse;
@@ -49,6 +53,10 @@ public class Facture {
         this.numtel = numtel;
         this.datedelivraison = datedelivraison;
         this.etat = etat;
+    }
+
+    public Facture(Panier pan) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

@@ -96,7 +96,6 @@ public class CommanderController implements Initializable {
       
         String numero = num.getText ();
         String adresse = adr.getText ();
-        LocalDate dateliv1 = date.getValue();
         String dateliv = date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
       
          if (validateInputs ()==true)

@@ -29,12 +29,12 @@
                <children>
                   <NumberValidator layoutX="43.0" layoutY="136.0" />
                </children></AnchorPane>
-            <TableView fx:id="table" editable="true" layoutX="24.0" layoutY="75.0" prefHeight="414.0" prefWidth="625.0" style="-fx-border-color: #5DADE2;">
+            <TableView fx:id="table" editable="true" layoutX="24.0" layoutY="75.0" prefHeight="414.0" prefWidth="583.0" style="-fx-border-color: #5DADE2;">
               <columns>
                 <TableColumn id="nompr" fx:id="nompr" minWidth="15.0" prefWidth="149.0" resizable="false" text="Nom Produit" />
                 <TableColumn id="descrip" fx:id="descrip" minWidth="15.0" prefWidth="240.0" resizable="false" text="Description" />
-                  <TableColumn id="prix" fx:id="prix" minWidth="15.0" prefWidth="136.0" resizable="false" text="Prix" />
-                  <TableColumn id="quantite" fx:id="quantite" minWidth="15.0" prefWidth="96.0" resizable="false" text="Quantite" />
+                  <TableColumn id="prix" fx:id="prix" minWidth="15.0" prefWidth="113.0" resizable="false" text="Prix" />
+                  <TableColumn id="quantite" fx:id="quantite" minWidth="15.0" prefWidth="81.0" resizable="false" text="Quantite" />
               </columns>
                <columnResizePolicy>
                    
@@ -46,7 +46,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <Button fx:id="delete" layoutX="771.0" layoutY="278.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #ff6647;" text="Supprimer" textFill="WHITE">
+      <Button fx:id="delete" layoutX="766.0" layoutY="248.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #ff6647;" text="Supprimer" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -75,18 +75,24 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Button fx:id="editqte" layoutX="771.0" layoutY="190.0" mnemonicParsing="false" onAction="#editqte" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #dd942f;" text="Modifier" textFill="WHITE">
+      <Button fx:id="editqte" layoutX="766.0" layoutY="160.0" mnemonicParsing="false" onAction="#editqte" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #dd942f;" text="Modifier" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-                  <ImageView fitHeight="121.0" fitWidth="132.0" layoutX="758.0" layoutY="361.0">
+                  <ImageView fitHeight="121.0" fitWidth="132.0" layoutX="673.0" layoutY="380.0">
                      <image>
                         <Image url="@../Images/devis.png" />
                      </image>
                   </ImageView>
       
-               <JFXButton fx:id="btndevis" layoutX="758.0" layoutY="368.0" onAction="#btndevis" prefHeight="107.0" prefWidth="132.0" text="." />
+               <JFXButton fx:id="btndevis" layoutX="673.0" layoutY="387.0" onAction="#btndevis" prefHeight="107.0" prefWidth="132.0" text="." />
+      <ImageView fitHeight="145.0" fitWidth="152.0" layoutX="842.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/facture.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnfacture" layoutX="848.0" layoutY="380.0" onAction="#btnfacture" prefHeight="131.0" prefWidth="132.0" text="." />
       
    </children>
 </AnchorPane>

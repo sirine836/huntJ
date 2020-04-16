@@ -6,6 +6,7 @@
 package Controllers;
 
 import Entities.Facture;
+import Entities.Lignepanier;
 import Entities.Panier;
 import Services.FactureService;
 import Services.LignePanierService;
@@ -24,8 +25,10 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -199,14 +202,19 @@ public class PaiementController implements Initializable {
              }
              System.out.println(f.toString());
              Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
-             alert.setTitle("Confirmation d'Ajout");
+             alert.setTitle("Confirmation de Validation ");
              alert.setHeaderText("Confirmation");
-             alert.setContentText("Ajouter Produit ??");
+             alert.setContentText("Valider !");
              Optional<ButtonType> result=alert.showAndWait();
              
              
       if(result.get()==ButtonType.OK){
-           fs.ajouterFacture2(f);
+          if(f.getPanier_id()!=Config.currentpanier ) 
+          {
+          fs.ajouterFacture2(f);
+          }else {fs.modifierFacture(f.getIdfact(), Config.currentpanier,numero,
+               adresse,dateliv, 1);
+          }
            alert.setContentText("Ajouté");
            System.out.println("Nouveaux Produit ");
            firstpane.getChildren().clear();
@@ -224,7 +232,63 @@ public class PaiementController implements Initializable {
     
         }
     }
+    
+    private void btnpayinit() throws IOException, SQLException {
+      FactureService fs= new FactureService();
+      Facture f = new Facture();
+      Panier panier = new Panier();
+      PanierService panierService = new PanierService();
             
+        String numero = tel.getText ();
+        String adresse = address.getText ();
+        String dateliv = date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+       
+       if (validateInputs ()==true)
+            {
+               f.setNumtel(numero);
+               f.setAdresse(adresse);
+               f.setDatedelivraison(dateliv);
+               try {
+                    panier = panierService.getCurrentPanierByUserID(Config.currentUser);
+                    f.setPanier_id(Config.newpanier);
+               } catch (SQLException ex) {
+             ex.getSQLState();
+             }
+             System.out.println(f.toString());
+             Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+             alert.setTitle("Confirmation de Validation ");
+             alert.setHeaderText("Confirmation");
+             alert.setContentText("Valider !");
+             Optional<ButtonType> result=alert.showAndWait();
+             
+             
+      if(result.get()==ButtonType.OK){
+          if(f.getPanier_id()!=Config.newpanier ) 
+          {
+          fs.ajouterFacture2(f);
+          }else {fs.modifierFacture(f.getIdfact(), Config.newpanier,numero,
+               adresse,dateliv, 1);
+          }
+           alert.setContentText("Ajouté");
+           System.out.println("Nouveaux Produit ");
+           firstpane.getChildren().clear();
+           Parent parent = FXMLLoader.load(getClass().getResource("Panier.fxml"));
+           firstpane.getChildren().add(parent);
+           firstpane.toFront();
+             }else{
+                 
+        System.out.println("Annuler");
+        firstpane.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("paiement.fxml"));
+        firstpane.getChildren().add(parent);
+        firstpane.toFront();
+             }
+    
+        }
+    }
+           
+    
+
 
     @FXML
     private void AnnulerFunction(javafx.event.ActionEvent event) throws IOException, SQLException{
@@ -239,11 +303,18 @@ public class PaiementController implements Initializable {
         }
     }
     
-    
+   
     
     
     @FXML
     private void validerFunction(javafx.event.ActionEvent event) throws IOException, SQLException {
+        PanierService p = new PanierService();
+        FactureService fs= new FactureService();
+        LignePanierService lps=new LignePanierService();
+        
+      Facture f = new Facture();
+      Panier panier = new Panier();
+      String formater=null;
          try {
             int mois = Integer.parseInt(MoisValidite.getText());
             int annee = Integer.parseInt(AnneeValidite.getText());
@@ -291,20 +362,36 @@ public class PaiementController implements Initializable {
                 if (token != null) {
 //                TODO change amount by the real Panier Prix Total
 //                TODO change UserMail By Real User mail
-                    Double amount =  ser.calcul_total(Config.currentpanier)+5;
+                    Double amount = ser.calcul_total(Config.currentpanier);
 
                     Charge ch = StripePayment.ChargePayement("rk_test_oGfrFNOjpnRPklUVzjelPHgf", "usd", "tok_visa", amount, "sk_test_sM3fCA57AXRf30HBdPYXDmY80083NDeCJu", numeroCarte.getText(), mois, annee, ccvTextField.getText(), Config.userMail);
                     String tit = "Paiement réussi";
                     String message = "Votre paiement a été traité avec succès";
                     System.out.println(message);
-                
-                  btnpay();
+                btnpay();
+                  p.updatePan(Config.currentpanier,Config.currentUser,amount+(amount/100*18)+5);
+                   
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Success");
                     alert.setContentText("Votre Commande est en Cours de traitement !");
                     alert.setHeaderText(null);
                     alert.showAndWait();
                     
+                    /*   if(f.getEtat()==1)
+                        {Date aujourdhui = new Date();
+                         formater = new SimpleDateFormat("dd-MM-yy").toString();
+                         Panier pan=new Panier(Config.currentUser,formater);
+                          Facture fp=new Facture(Config.newpanier);
+                         Lignepanier l = new Lignepanier();
+                          p.updatePanierinit(Config.newpanier,Config.currentUser);
+                         p.ajouterPanier2(pan);
+                         System.out.println(pan);
+                        
+                         lps.ajouterLigne(l);
+                         btnpay();
+                        }
+                       
+                      */
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
