@@ -52,9 +52,15 @@
                         <TableColumn fx:id="etat" prefWidth="75.0" text="Etat" />
               </columns>
             </TableView>
-                  <ImageView fitHeight="89.0" fitWidth="66.0" layoutX="723.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="89.0" fitWidth="66.0" layoutX="702.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/telecharger%20pdf.jpg" />
+                     </image>
+                  </ImageView>
+                  
+                   <ImageView fitHeight="108.0" fitWidth="117.0" layoutX="681.0"  layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/voir.jpg" />
                      </image>
                   </ImageView>
          </children>

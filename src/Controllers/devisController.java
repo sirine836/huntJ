@@ -58,7 +58,7 @@ import javafx.stage.Stage;
 public class devisController implements Initializable {
      private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
     private static Font orangeFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.NORMAL, BaseColor.ORANGE);
-    
+    private static Font redF = new Font(Font.FontFamily.TIMES_ROMAN, 30, Font.NORMAL, BaseColor.RED);
     @FXML
     private Label calc;
     
@@ -183,19 +183,26 @@ public class devisController implements Initializable {
             ps = (PreparedStatement) connexion.prepareStatement(query);
             rs = ps.executeQuery();
             int i = 1;
+            LignePanierService ser = new LignePanierService();
             while (rs.next()) {
                 Paragraph p2 = new Paragraph("Article n°" + i, redFont);
                 document.add(p2);
 
                 Paragraph para = new Paragraph("Nom Article  : " + rs.getString("nompr") + " \n Prix Unitaire   :" + rs.getDouble("prix") + " \n Quantité  : " + rs.getInt("quantite"));
-                
-
                 document.add(para);
-                
+              
                 document.add(new Paragraph("  "));
 
                 i++;
             }
+            
+            double a= ser.calcul_total(Config.currentpanier);
+               Paragraph p1 = new Paragraph("Prix Total :  "+a + "  DT" ,redF);
+               
+               p1.setAlignment(Element.ALIGN_CENTER);
+               
+                document.add(p1);
+                
 
             document.close();
             System.out.println("finished");
