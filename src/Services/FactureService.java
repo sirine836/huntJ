@@ -116,7 +116,7 @@ public class FactureService {
             st=connexion.createStatement();
             ResultSet result=st.executeQuery(req);
             while(result.next())
-            {    Facture p = new Facture(result.getString("id"),result.getString("adresse"),result.getString("dateDeLivraison"),result.getInt("etat"));
+            {    Facture p = new Facture(result.getInt("id"),result.getString("adresse"),result.getString("dateDeLivraison"),result.getInt("etat"));
             fact.add(p);
                     }
         } catch (SQLException ex) {

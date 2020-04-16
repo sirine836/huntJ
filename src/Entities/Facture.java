@@ -42,6 +42,13 @@ public class Facture {
       
     }
 
+     public Facture(int idfact,String adresse,String datedelivraison,int etat) {
+        this.adresse = adresse;
+        this.datedelivraison = datedelivraison;
+        this.numtel = numtel;
+        this.etat = etat;
+      this.idfact = idfact;
+    }
    
     
     

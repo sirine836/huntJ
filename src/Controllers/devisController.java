@@ -59,6 +59,11 @@ public class devisController implements Initializable {
      private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
     private static Font orangeFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.NORMAL, BaseColor.ORANGE);
     private static Font redF = new Font(Font.FontFamily.TIMES_ROMAN, 30, Font.NORMAL, BaseColor.RED);
+    private static Font noi = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.NORMAL, BaseColor.BLACK);
+    
+    
+    
+
     @FXML
     private Label calc;
     
@@ -152,29 +157,29 @@ public class devisController implements Initializable {
             PdfWriter.getInstance(document, new FileOutputStream(file_name));
 
             document.open();
-            Paragraph par = new Paragraph("La liste des devis", orangeFont);
-            Paragraph parr = new Paragraph("___________________", orangeFont);
+             Paragraph p = new Paragraph("  ");
+             Image img = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\thunt.png");
+            
+             img.scaleAbsolute(200, 200);
+            img.setAbsolutePosition(10, 630);
+            document.add(img);
+            
+            document.add(p);
+            document.add(p);
+            document.add(p);
+            Paragraph par = new Paragraph("     La liste des devis", orangeFont);
+            Paragraph parr = new Paragraph("    ___________________", orangeFont);
             par.setAlignment(Element.ALIGN_CENTER);
             parr.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph p = new Paragraph("  ");
+           
             document.add(par);
             document.add(parr);
             document.add(p);
             document.add(p);
             document.add(p);
-            Image img = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\thunt.png");
-            Image img2 = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\cod.png");
-            img.scaleAbsolute(50f, 50f);
-            img.setAbsolutePosition(450f, 775f);
-            img2.setAbsolutePosition(100f, 775f);
-            img2.scaleAbsolute(50f, 50f);
-
-            document.add(img);
-            document.add(img2);
-            document.add(p);
-            document.add(p);
-            document.add(p);
+           
+            
 
             Connection connexion = MyDbConnection.getInstance().getConnexion();
             PreparedStatement ps = null;
@@ -195,6 +200,10 @@ public class devisController implements Initializable {
 
                 i++;
             }
+            
+            Paragraph parrr = new Paragraph("____________________________________", noi);
+            parrr.setAlignment(Element.ALIGN_CENTER);
+            document.add(parrr);
             
             double a= ser.calcul_total(Config.currentpanier);
                Paragraph p1 = new Paragraph("Prix Total :  "+a + "  DT" ,redF);

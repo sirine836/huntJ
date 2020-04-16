@@ -69,18 +69,12 @@ public class AfficherFactureController implements Initializable {
     private Label calc;
    
     
-     @FXML
-    private AnchorPane anc;
-
-     
-      @FXML
-    private AnchorPane avr;
 
     @FXML
     private TableView<Facture> tablef;
     
     @FXML
-    private TableColumn<Facture, Integer> numf;
+    private TableColumn<Facture, Integer> idfact;
 
     @FXML
     private TableColumn<Facture, String> adresse;
@@ -88,18 +82,17 @@ public class AfficherFactureController implements Initializable {
     @FXML
     private TableColumn<Facture, Integer> etat;
     @FXML
-    private TableColumn<Facture, ? > date;
-     @FXML
-    private Button btn1;
+    private TableColumn<Facture, String> date;
+    
    
    @FXML
-    private Button btn;
+    private JFXButton btn;
     
-    @FXML
     public ObservableList<Facture> data = FXCollections.observableArrayList();
     
      private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
     private static Font orangeFont = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.NORMAL, BaseColor.ORANGE);
+    private static Font noi = new Font(Font.FontFamily.TIMES_ROMAN, 24, Font.NORMAL, BaseColor.BLACK);
     
 
     /**
@@ -112,13 +105,13 @@ public class AfficherFactureController implements Initializable {
          FactureService fer = new FactureService();
        Lignepanier l= new Lignepanier();
        
-       String dateliv = date.getText();
-    numf.setCellValueFactory(new PropertyValueFactory<Facture,Integer>("id"));
+      
+    idfact.setCellValueFactory(new PropertyValueFactory<Facture,Integer>("idfact"));
     adresse.setCellValueFactory(new PropertyValueFactory<Facture,String>("adresse"));
-   // date.setCellValueFactory(new PropertyValueFactory<Facture,DateTimeFormatter>("dateDeLivraison"));
+    date.setCellValueFactory(new PropertyValueFactory<Facture,String>("dateDeLivraison"));
     etat.setCellValueFactory(new PropertyValueFactory<Facture,Integer>("etat"));
       
-    numf.setStyle("-fx-alignment: CENTER;");
+    idfact.setStyle("-fx-alignment: CENTER;");
     date.setStyle("-fx-alignment: CENTER;");
     etat.setStyle("-fx-alignment: CENTER;");
         try {
@@ -129,7 +122,7 @@ public class AfficherFactureController implements Initializable {
             calc.setText(String.valueOf(amount+(amount/100*18)+5));
         }
         } catch (SQLException ex) {
-            Logger.getLogger(devisController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AfficherFactureController.class.getName()).log(Level.SEVERE, null, ex);
         }
     
         data =fer.indexActionfacture(Config.currentpanier);
@@ -167,42 +160,40 @@ public class AfficherFactureController implements Initializable {
      @FXML
     private void PDF(ActionEvent event) throws DocumentException, FileNotFoundException {
         try {
-            LignePanierService es = new LignePanierService();
+            FactureService es = new FactureService();
 
-            String file_name = "C:\\Users\\cyrine\\Desktop\\Avis.pdf";
+            String file_name = "C:\\Users\\cyrine\\Desktop\\Facture.pdf";
             Document document = new Document();
 
             PdfWriter.getInstance(document, new FileOutputStream(file_name));
 
             document.open();
-            Paragraph par = new Paragraph("La liste des devis", orangeFont);
+            Paragraph p = new Paragraph("  ");
+             Image img = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\thunt.png");
+            
+             img.scaleAbsolute(200, 200);
+            img.setAbsolutePosition(10, 630);
+            document.add(img);
+            
+            document.add(p);
+            document.add(p);
+            document.add(p);
+            Paragraph par = new Paragraph("La liste des Factures  ", orangeFont);
             Paragraph parr = new Paragraph("___________________", orangeFont);
             par.setAlignment(Element.ALIGN_CENTER);
             parr.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph p = new Paragraph("  ");
+            
             document.add(par);
             document.add(parr);
             document.add(p);
             document.add(p);
             document.add(p);
-            Image img = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\thunt.png");
-            Image img2 = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\cod.png");
-            img.scaleAbsolute(50f, 50f);
-            img.setAbsolutePosition(450f, 775f);
-            img2.setAbsolutePosition(100f, 775f);
-            img2.scaleAbsolute(50f, 50f);
-
-            document.add(img);
-            document.add(img2);
-            document.add(p);
-            document.add(p);
-            document.add(p);
-
+         
             Connection connexion = MyDbConnection.getInstance().getConnexion();
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String query = "Select p.nompr,p.prix,lp.quantite from ligne_panier lp join product p where p.id=lp.product_id";
+            String query = "Select f.id,f.adresse,f.dateDeLivraison,f.etat from facture f join panier p where p.id=f.panier_id ";
             ps = (PreparedStatement) connexion.prepareStatement(query);
             rs = ps.executeQuery();
             int i = 1;
@@ -211,21 +202,39 @@ public class AfficherFactureController implements Initializable {
                 Paragraph p2 = new Paragraph("Article n°" + i, redFont);
                 document.add(p2);
 
-                Paragraph para = new Paragraph("Nom Article  : " + rs.getString("nompr") + " \n Prix Unitaire   :" + rs.getDouble("prix") + " \n Quantité  : " + rs.getInt("quantite"));
+                Paragraph para = new Paragraph("Numéro de la Facture  : " + rs.getInt("idfact") +
+                        " \n Adresse   :  " + rs.getString("adresse") + " \n Date de livraison  : " 
+                        + rs.getString("dateDeLivraison")+ " \n Etat de la facture   :  " + rs.getInt("etat"));
                 document.add(para);
               
                 document.add(new Paragraph("  "));
 
                 i++;
             }
-            
+            Paragraph parrz = new Paragraph("_____________________________________", redFont);
+            parrz.setAlignment(Element.ALIGN_CENTER);
+            document.add(parrz);
             double a= ser.calcul_total(Config.currentpanier);
-               Paragraph p1 = new Paragraph("Prix Total :  "+a + "  DT" ,redFont);
-               
+               Paragraph p1 = new Paragraph("Prix HT :  "+a + "  DT" ,noi);
                p1.setAlignment(Element.ALIGN_CENTER);
-               
-                document.add(p1);
-                
+               document.add(p1);
+            int tva= 18;
+               Paragraph tv = new Paragraph("TVA :  "+tva+ "  %" ,noi);
+               tv.setAlignment(Element.ALIGN_CENTER);
+               document.add(tv);
+            int frais= 5;
+               Paragraph f = new Paragraph("frais :  "+frais+ "  DT" ,noi);
+               f.setAlignment(Element.ALIGN_CENTER);
+               document.add(f);
+               Paragraph parrzz = new Paragraph("_________________", redFont);
+            parrzz.setAlignment(Element.ALIGN_CENTER);
+            document.add(parrzz); 
+            
+           double b= ser.calcul_total(Config.currentpanier);
+           double x= b+(b/100*18)+5;
+               Paragraph p1t = new Paragraph("Prix Total a payer :  "+x + "  DT" ,noi);
+               p1t.setAlignment(Element.ALIGN_CENTER);
+               document.add(p1t);
 
             document.close();
             System.out.println("finished");

@@ -46,7 +46,7 @@
             <Line endX="431.0" layoutX="168.0" layoutY="451.0" startX="110.0" />
             <TableView id="tablef" fx:id="tablef" layoutX="227.0" layoutY="102.0" prefHeight="322.0" prefWidth="424.0" style="-fx-background-color: #fff2ac;">
               <columns>
-                <TableColumn fx:id="numf" prefWidth="111.0" text="Numéro Facture" />
+                <TableColumn fx:id="idfact" prefWidth="111.0" text="Numéro Facture" />
                 <TableColumn fx:id="adresse" prefWidth="116.0" text="Adresse" />
                   <TableColumn fx:id="date" prefWidth="127.0" text="Date de livraison" />
                         <TableColumn fx:id="etat" prefWidth="75.0" text="Etat" />
@@ -58,11 +58,13 @@
                      </image>
                   </ImageView>
                   
-                   <ImageView fitHeight="108.0" fitWidth="117.0" layoutX="681.0"  layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+                   <ImageView fitHeight="108.0" fitWidth="117.0" layoutX="681.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/voir.jpg" />
                      </image>
                   </ImageView>
+                  <JFXButton fx:id="calculp" layoutX="676.0" layoutY="184.0" onAction="#calculp" prefHeight="116.0" prefWidth="119.0" text="." />
+                  <JFXButton fx:id="btn" layoutX="697.0" layoutY="315.0" onAction="#PDF" prefHeight="128.0" prefWidth="76.0" text="." />
          </children>
       </AnchorPane>
    </children>
