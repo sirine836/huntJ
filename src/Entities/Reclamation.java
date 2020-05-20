@@ -36,9 +36,10 @@ public class Reclamation {
         this.nomproduit = nomproduit;
     }
 
-    public Reclamation(int produit, String probleme) {
+    public Reclamation(int produit, String probleme, int user) {
         this.produit = produit;
         this.probleme = probleme;
+        this.user=user;
     }
     
     public Reclamation(int id, int produit, int user, String probleme, String nomproduit, String nomuser, String nometat) {
@@ -80,6 +81,8 @@ public class Reclamation {
         this.probleme = probleme;
       
     }
+
+   
     
     public int getId() {
         return id;
