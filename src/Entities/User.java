@@ -5,14 +5,22 @@
  */
 package Entities;
 
+
+
 /**
  *
  * @author cyrine
  */
+
 public class User {
+
+    private int id;
+    private String nom;
+    private String email;
+    private String password;
+    private String roles;
+    private int enabled;
     
-     private int idu;
-    private String nom, prenom,email,password,last_login,roles;
     
     
     
@@ -21,14 +29,28 @@ public class User {
     public User() {
     }
 
-    public User(int idu, String nom, String prenom, String email, String password, String last_login, String roles) {
-        this.idu = idu;
+    public User(int id, String nom, String email, String password, String roles) {
+        this.id = id;
         this.nom = nom;
-        this.prenom = prenom;
         this.email = email;
         this.password = password;
-        this.last_login = last_login;
         this.roles = roles;
+    }
+    public User( String nom, String email, String password) {
+        
+        this.nom = nom;
+        this.email = email;
+        this.password = password;
+        this.roles="user";
+        }
+
+    public User(int id, String nom, String email, String password, String roles, int enabled) {
+        this.id = id;
+        this.nom = nom;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.enabled = enabled;
     }
 
    
@@ -36,12 +58,12 @@ public class User {
     
     /*----------------------------------------------*/
 
-    public int getIdu() {
-        return idu;
+    public int getId() {
+        return id;
     }
 
-    public void setIdu(int idu) {
-        this.idu = idu;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -50,14 +72,6 @@ public class User {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
     }
 
     public String getEmail() {
@@ -76,20 +90,20 @@ public class User {
         this.password = password;
     }
 
-    public String getLast_login() {
-        return last_login;
-    }
-
-    public void setLast_login(String last_login) {
-        this.last_login = last_login;
-    }
-
     public String getRoles() {
         return roles;
     }
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
     
     
@@ -98,8 +112,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "idu=" + idu + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password=" + password + ", last_login=" + last_login + ", roles=" + roles + '}';
+        return "User{" + "id=" + id + ", nom=" + nom + ", email=" + email + ", password=" + password + ", roles=" + roles + '}';
     }
+
+    
 
   
     

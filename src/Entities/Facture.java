@@ -13,7 +13,7 @@ package Entities;
  * @author gogo-
  */
 public class Facture {
-    private int idfact,panier_id;
+    private int id,panier_id;
     private String adresse, numtel, datedelivraison;
     private int etat;
     
@@ -22,9 +22,38 @@ public class Facture {
 
     public Facture() {
     }
+    
+    public Facture(int panier_id) {
+        this.panier_id = panier_id;
+    }
 
-    public Facture(int idfact, int panier_id, String adresse, String numtel, String datedelivraison, int etat) {
-        this.idfact = idfact;
+    public Facture(int panier_id,  String numtel,String adresse, String datedelivraison) {
+        this.panier_id = panier_id;
+        this.adresse = adresse;
+        this.numtel = numtel;
+        this.datedelivraison = datedelivraison;
+    }
+
+    
+  
+     public Facture(int id,String adresse,String datedelivraison,int etat) {
+        this.adresse = adresse;
+        this.datedelivraison = datedelivraison;
+        this.etat = etat;
+      this.id = id;
+    }
+
+    public Facture(int id,String numtel, String adresse,  String datedelivraison, int etat) {
+        this.id = id;
+        this.adresse = adresse;
+        this.numtel = numtel;
+        this.datedelivraison = datedelivraison;
+        this.etat = etat;
+    }
+   
+ 
+    public Facture(int id, int panier_id,String numtel, String adresse,  String datedelivraison, int etat) {
+        this.id = id;
         this.panier_id = panier_id;
         this.adresse = adresse;
         this.numtel = numtel;
@@ -32,27 +61,16 @@ public class Facture {
         this.etat = etat;
     }
 
-   
 
-    public Facture(String adresse, String numtel, int etat) {
-        this.adresse = adresse;
-        this.numtel = numtel;
-        this.etat = etat;
-    }
-
-   
-
-    
-    
   
     /*---------------------------------------------------------------*/ 
 
     public int getIdfact() {
-        return idfact;
+        return id;
     }
 
     public void setIdfact(int idfact) {
-        this.idfact = idfact;
+        this.id = idfact;
     }
 
     public String getAdresse() {
@@ -106,7 +124,7 @@ public class Facture {
 
     @Override
     public String toString() {
-        return "Facture{" + "idfact=" + idfact + ", panier_id=" + panier_id + ", adresse=" + adresse + ", numtel=" + numtel + ", datedelivraison=" + datedelivraison + ", etat=" + etat + '}';
+        return "Facture{" + "id=" + id + ", panier_id=" + panier_id + ", adresse=" + adresse + ", numtel=" + numtel + ", datedelivraison=" + datedelivraison + ", etat=" + etat + '}';
     }
 
     

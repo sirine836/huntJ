@@ -23,6 +23,8 @@ public class Seller {
     public int phonenumber;
     public String email;
     public String image;
+    private int idUser;
+    private String username;
     
     public Seller (){
     }
@@ -58,10 +60,74 @@ public class Seller {
         this.image = image;
     }
 
-    public Seller(TextField sellername, TextField rcs, TextField taxnumber, TextField tva, TextField siren, TextField fax, TextField phonenumber, TextField email, Button license) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Seller(String sellername, String rcs, String taxnumber, int tva, int siren, int fax, int phonenumber, String email) {
+        this.sellername = sellername;
+        this.rcs = rcs;
+        this.taxnumber = taxnumber;
+        this.tva = tva;
+        this.siren = siren;
+        this.fax = fax;
+        this.phonenumber = phonenumber;
+        this.email = email;
     }
 
+    public Seller(int id, String sellername, String rcs, String taxnumber, int tva, int siren, int fax, int phonenumber, String email) {
+        this.id = id;
+        this.sellername = sellername;
+        this.rcs = rcs;
+        this.taxnumber = taxnumber;
+        this.tva = tva;
+        this.siren = siren;
+        this.fax = fax;
+        this.phonenumber = phonenumber;
+        this.email = email;
+    }
+
+    public Seller(int id, String sellername, String rcs, String taxnumber, int tva, int siren, int fax, int phonenumber, String email, String image, String username) {
+        this.id = id;
+        this.sellername = sellername;
+        this.rcs = rcs;
+        this.taxnumber = taxnumber;
+        this.tva = tva;
+        this.siren = siren;
+        this.fax = fax;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.image = image;
+        this.username = username;
+    }
+
+    public Seller(int id, String sellername, String rcs, String taxnumber, int tva, int siren, int fax, int phonenumber, String email, String image, int idUser, String username) {
+        this.id = id;
+        this.sellername = sellername;
+        this.rcs = rcs;
+        this.taxnumber = taxnumber;
+        this.tva = tva;
+        this.siren = siren;
+        this.fax = fax;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.image = image;
+        this.idUser = idUser;
+        this.username = username;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     public int getId() {
         return id;
     }
@@ -141,5 +207,13 @@ public class Seller {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "Seller{" + "id=" + id + ", sellername=" + sellername + ", rcs=" + rcs + ", taxnumber=" + taxnumber + ", tva=" + tva + ", siren=" + siren + ", fax=" + fax + ", phonenumber=" + phonenumber + ", email=" + email + ", image=" + image + ", username=" + username + '}';
+    }
+
+   
+    
     
 }

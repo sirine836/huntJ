@@ -7,15 +7,14 @@ package Entities;
 
 /**
  *
- * @author youss
+ * @author sarra
  */
 public class Reclamation {
     private int id;
     private int produit;
     private int user;
-    private int etat;
+    private int etat=0;
     private String probleme;
-    private String type;
     private String nomproduit;
     private String nomuser;
     private String nometat;
@@ -23,63 +22,67 @@ public class Reclamation {
     
     
     
-    public Reclamation(int id, int produit, String probleme, String type, String nomproduit) {
+    public Reclamation(int id, int produit, String probleme, String nomproduit) {
         this.id = id;
         this.produit = produit;
         this.probleme = probleme;
-        this.type = type;
+    
         this.nomproduit = nomproduit;
     }
 
-    public Reclamation(int produit, String probleme, String type, String nomproduit) {
+    public Reclamation(int produit, String probleme, String nomproduit) {
         this.produit = produit;
         this.probleme = probleme;
-        this.type = type;
         this.nomproduit = nomproduit;
     }
+
+    public Reclamation(int produit, String probleme, int user) {
+        this.produit = produit;
+        this.probleme = probleme;
+        this.user=user;
+    }
     
-    
+    public Reclamation(int id, int produit, int user, String probleme, String nomproduit, String nomuser, String nometat) {
+        this.id = id;
+        this.produit = produit;
+        this.user = user;
+        this.probleme = probleme;
+        this.nomproduit = nomproduit;
+        this.nomuser = nomuser;
+        this.nometat = nometat;
+    }
     
 
-    public Reclamation(int id, int produit, int user, int etat, String probleme, String type, String nomproduit, String nomuser, String nometat) {
+    public Reclamation(int id, int produit, int user, int etat, String probleme, String nomproduit, String nomuser, String nometat) {
         this.id = id;
         this.produit = produit;
         this.user = user;
         this.etat = etat;
         this.probleme = probleme;
-        this.type = type;
         this.nomproduit = nomproduit;
         this.nomuser = nomuser;
         this.nometat = nometat;
     }
 
-    public Reclamation(int produit, int user, int etat, String probleme, String type, String nomproduit, String nomuser, String nometat) {
-        this.produit = produit;
-        this.user = user;
-        this.etat = etat;
-        this.probleme = probleme;
-        this.type = type;
-        this.nomproduit = nomproduit;
-        this.nomuser = nomuser;
-        this.nometat = nometat;
-    }
-
-    public Reclamation(int id, int produit, int user, int etat, String probleme, String type) {
+    
+    public Reclamation(int id, int produit, int user, int etat, String probleme) {
         this.id = id;
         this.produit = produit;
         this.user = user;
         this.etat = etat;
         this.probleme = probleme;
-        this.type = type;
+    
     }
 
-    public Reclamation(int produit, int user, int etat, String probleme, String type) {
+    public Reclamation(int produit, int user, int etat, String probleme) {
         this.produit = produit;
         this.user = user;
         this.etat = etat;
         this.probleme = probleme;
-        this.type = type;
+      
     }
+
+   
     
     public int getId() {
         return id;
@@ -121,13 +124,6 @@ public class Reclamation {
         this.probleme = probleme;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getNomproduit() {
         return nomproduit;

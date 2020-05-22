@@ -7,92 +7,73 @@ package Entities;
 
 /**
  *
- * @author youss
+ * @author sarra
  */
 public class Avis {
     private int id;
     private int produit;
     private int user;
-    private String type;
     private String note;
     private String nomproduit;
     private String nomuser;
+    private String rate;
 
-  
-    
-    
-
-    public Avis(int id, int produit, int user, String type, String note, String nomproduit) {
+    public Avis(int id, int produit, int user, String nomproduit, String rate) {
         this.id = id;
         this.produit = produit;
         this.user = user;
-        this.type = type;
-        this.note = note;
         this.nomproduit = nomproduit;
+        this.rate = rate;
     }
+    
 
-    public Avis(int produit, String type, String note, String nomproduit) {
+    
+
+    public Avis(int produit, String rate, int user) {
         this.produit = produit;
-        this.type = type;
-        this.note = note;
-        this.nomproduit = nomproduit;
+        this.rate = rate;
+        this.user=user;
     }
 
-    public Avis(String type, String note) {
-        this.type = type;
-        this.note = note;
-    }
-    
-    
-
-  
-
-    public Avis(String type, String note, String nomproduit) {
-        this.type = type;
-        this.note = note;
-        this.nomproduit = nomproduit;
-    }
-    
-    
-
-    
-    public Avis(int id, int produit, int user, String type, String note, String nomproduit, String nomuser) {
+    public Avis(int id, int produit, int user, String nomproduit, String nomuser, String rate) {
         this.id = id;
         this.produit = produit;
         this.user = user;
-        this.type = type;
+        this.nomproduit = nomproduit;
+        this.nomuser = nomuser;
+        this.rate = rate;
+    }
+
+    
+
+    
+
+   
+    
+    
+    
+
+    public Avis(int produit, int user, String note, String nomproduit, String nomuser) {
+        this.produit = produit;
+        this.user = user;
         this.note = note;
         this.nomproduit = nomproduit;
         this.nomuser = nomuser;
     }
 
-    public Avis(int produit, int user, String type, String note, String nomproduit, String nomuser) {
-        this.produit = produit;
-        this.user = user;
-        this.type = type;
-        this.note = note;
-        this.nomproduit = nomproduit;
-        this.nomuser = nomuser;
-    }
-
-    public Avis(int produit, int user, String type, String note) {
-        this.produit = produit;
-        this.user = user;
-        this.type = type;
-        this.note = note;
-    }
-
-    public Avis(int id, int produit, int user, String type, String note) {
+    public Avis(int id, int produit, int user, String note) {
         this.id = id;
         this.produit = produit;
         this.user = user;
-        this.type = type;
         this.note = note;
     }
 
-    
-    
-    
+    public Avis(int produit, int user, String note) {
+        this.produit = produit;
+        this.user = user;
+        this.note = note;
+    }
+
     public int getId() {
         return id;
     }
@@ -115,14 +96,6 @@ public class Avis {
 
     public void setUser(int user) {
         this.user = user;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getNote() {
@@ -148,4 +121,17 @@ public class Avis {
     public void setNomuser(String nomuser) {
         this.nomuser = nomuser;
     }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+    
+
+  
+    
+    
 }

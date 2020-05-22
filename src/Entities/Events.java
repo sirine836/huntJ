@@ -16,20 +16,56 @@ import java.util.Set;
  */
 public class Events {
 
-    private int id;
+    public int id;
     private String titre;
     private String description;
-    private Date date;
-    private int nbrPlaces;
+    private String date;
+    public int nbrPlaces;
     private double prix;
     private String localisation;
-    private String nom_image;
-    private Set<Reservations> listReservation = new HashSet<Reservations>();
+    private int idPro;
+    private String Image;
 
+    public Events(int id, String titre, String description, int nbrPlaces, double prix, String localisation) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+        this.nbrPlaces = nbrPlaces;
+        this.prix = prix;
+        this.localisation = localisation;
+    }
+    
+    
+    
+    
+    
     public Events() {
     }
 
-    public Events(int id, String titre, String description, Date date, int nbrPlaces, double prix, String localisation, String nom_image) {
+    public Events(String titre, String description, String date, int nbrPlaces, double prix, String localisation, int idPro) {
+        this.titre = titre;
+        this.description = description;
+        this.date = date;
+        this.nbrPlaces = nbrPlaces;
+        this.prix = prix;
+        this.localisation = localisation;
+        this.idPro = 1;
+    }
+    
+    public Events (String titre) {
+        this.titre = titre;
+    }
+
+    public Events(int id, int nbrPlaces) {
+        
+        this.nbrPlaces=nbrPlaces;
+        this.id = id;
+    }
+    
+    
+    
+
+    public Events(int id, String titre, String description, String date, int nbrPlaces, double prix, String localisation, String Image) {
         this.id = id;
         this.titre = titre;
         this.description = description;
@@ -37,20 +73,56 @@ public class Events {
         this.nbrPlaces = nbrPlaces;
         this.prix = prix;
         this.localisation = localisation;
-        this.nom_image = nom_image;
+        this.Image = Image;
     }
 
-    public Events(String titre, String description, Date date, int nbrPlaces, double prix, String localisation, String nom_image, boolean accesGratuit) {
+    public Events(String titre, String description, String date, int nbrPlaces, double prix, String localisation, int idPro, String Image) {
         this.titre = titre;
         this.description = description;
         this.date = date;
         this.nbrPlaces = nbrPlaces;
         this.prix = prix;
         this.localisation = localisation;
-        this.nom_image = nom_image;
+        this.idPro = idPro;
+        this.Image = Image;
     }
 
-    public Events(String titre, String description, Date date, int nbrPlaces, double prix, String localisation) {
+    public Events(int id, String titre, String description, String date, int nbrPlaces, double prix, String localisation, int idPro, String Image) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+        this.date = date;
+        this.nbrPlaces = nbrPlaces;
+        this.prix = prix;
+        this.localisation = localisation;
+        this.idPro = idPro;
+        this.Image = Image;
+    }
+    
+    
+
+    
+    public Events(int id ,String titre, String description, double prix, String date, int nbrPlaces, String Image) {
+        this.id = id;
+        this.titre = titre;
+        this.description = description;
+        this.date = date;
+        this.prix = prix;
+        this.nbrPlaces = nbrPlaces;
+        this.Image = Image;
+    }
+
+    public Events(String titre, String description, String date, int nbrPlaces, double prix, String localisation, String Image) {
+        this.titre = titre;
+        this.description = description;
+        this.date = date;
+        this.nbrPlaces = nbrPlaces;
+        this.prix = prix;
+        this.localisation = localisation;
+        this.Image = Image;
+    }
+
+    public Events(String titre, String description, String date, int nbrPlaces, double prix, String localisation) {
         this.titre = titre;
         this.description = description;
         this.date = date;
@@ -59,7 +131,8 @@ public class Events {
         this.localisation = localisation;
     }
 
-    public Events(String titre, String description) {
+    public Events(int id ,String titre, String description) {
+        this.id = id;
         this.titre = titre;
         this.description = description;
     }
@@ -88,11 +161,11 @@ public class Events {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -119,34 +192,29 @@ public class Events {
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
     }
-
-    public String getNom_image() {
-        return nom_image;
+    
+    public String getImage() {
+        return Image;
     }
 
-    public void setNom_image(String nom_image) {
-        this.nom_image = nom_image;
+    public void setImage(String Image) {
+        this.Image = Image;
+    }
+
+    public int getIdPro() {
+        return idPro;
+    }
+
+    public void setIdPro(int idPro) {
+        this.idPro = idPro;
     }
     
-    public Set<Reservations> getListReservation() {
-    return listReservation;
-  }
-
-  public void setListReservation(Set<Reservations> listReservation) {
-    this.listReservation= listReservation;
-  }
-
-  public void addReservation(Reservations reservation){
-    this.listReservation.add(reservation);
-  }
-
-  public void removeReservation(Reservations reservation){
-    this.listReservation.remove(reservation);
-  }
+    
 
     @Override
     public String toString() {
-        return "Events{" + "titre=" + titre + ", description=" + description + '}';
+        return   titre  ;
     }
+    
 
 }

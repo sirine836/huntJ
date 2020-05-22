@@ -18,18 +18,34 @@ private String prosurname;
 private String email;
 private String softskills;
 private String image; 
+private int idUser;
+private String username;
 
     public Professional()
     {
 
     }
-    public Professional(int id, String proname, String prosurname, String email, String softskills, String image) {
+
+    public Professional(int id, String proname, String prosurname, String email, String softskills, String image, int idUser , String username) {
         this.id = id;
         this.proname = proname;
         this.prosurname = prosurname;
         this.email = email;
         this.softskills = softskills;
         this.image = image;
+        this.idUser = idUser;
+        this.username = username;
+    }
+
+    public Professional(String proname, String prosurname, String email, String softskills, String image, int idUser, String username) {
+        this.proname = proname;
+        this.prosurname = prosurname;
+        this.email = email;
+        this.softskills = softskills;
+        this.image = image;
+        this.idUser = idUser;
+        this.username = username;
+
     }
 
     public Professional(String proname, String prosurname, String email, String softskills, String image) {
@@ -39,6 +55,59 @@ private String image;
         this.softskills = softskills;
         this.image = image;
     }
+
+    public Professional(int id, String proname, String prosurname, String email, String softskills, String image) {
+        this.id = id;
+        this.proname = proname;
+        this.prosurname = prosurname;
+        this.email = email;
+        this.softskills = softskills;
+        this.image = image;
+    }
+
+    public Professional(int id, String proname, String prosurname, String email, String softskills) {
+        this.id = id;
+        this.proname = proname;
+        this.prosurname = prosurname;
+        this.email = email;
+        this.softskills = softskills;
+    }
+
+    public Professional(int id, String proname, String prosurname, String email, String softskills, String image, String username) {
+        this.id = id;
+        this.proname = proname;
+        this.prosurname = prosurname;
+        this.email = email;
+        this.softskills = softskills;
+        this.image = image;
+        this.username = username;
+    }
+    
+    
+    
+
+ 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+   
+    public Professional(String email) {
+        this.email = email;
+    }
+    
 
     public int getId() {
         return id;
@@ -87,9 +156,12 @@ private String image;
     public void setImage(String image) {
         this.image = image;
     }
+
     @Override
     public String toString() {
-        return "Candidate{" + "id=" + id + ", Last Name=" + proname + ", First Name=" + prosurname + ", Email=" + email + ", Softskills=" + softskills + ", CV =" + image + '}';
+        return "Professional{" + "id=" + id + ", proname=" + proname + ", prosurname=" + prosurname + ", email=" + email + ", softskills=" + softskills + ", image=" + image + ", username=" + username + '}';
     }
+  
+    
 
 }

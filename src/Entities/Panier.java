@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import java.text.SimpleDateFormat;
+
 
 
 /**
@@ -34,13 +36,7 @@ public class Panier {
 
    
 
-    public Panier(int idpan, String datepanier, int etat, int archive, double prixtotal) {
-        this.idpan = idpan;
-        this.etat = etat;
-        this.archive = archive;
-        this.datepanier = datepanier;
-        this.prixtotal = prixtotal;
-    }
+   
 
     public Panier(int idpan,int etat, int archive, double prixtotal) {
          this.idpan = idpan;
@@ -49,6 +45,24 @@ public class Panier {
         this.prixtotal = prixtotal;
     }
 
+    public Panier(int user, String datepanier,int etat, int archive, double prixtotal) {
+       this.user = user;
+       this.datepanier = datepanier;
+        this.etat = etat;
+        this.archive = archive;
+        this.prixtotal = prixtotal;
+    }
+
+   
+
+    public Panier(String datepanier,int etat, int archive, double prixtotal) {
+         this.datepanier = datepanier;
+         this.etat = etat;
+        this.archive = archive;
+        this.prixtotal = prixtotal;
+    }
+
+    
   
 
   
@@ -115,6 +129,10 @@ public class Panier {
     @Override
     public String toString() {
         return "Panier{" + "idpan=" + idpan + ", user=" + user + ", etat=" + etat + ", archive=" + archive + ", datepanier=" + datepanier + ", prixtotal=" + prixtotal + '}';
+    }
+
+    public void updateP(int currentpanier, int currentUser, double calcul_total) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

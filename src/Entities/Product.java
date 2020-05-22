@@ -1,6 +1,8 @@
 
 package Entities;
 
+import com.sun.jmx.mbeanserver.Util;
+
 /**
  *
  * @author MONDHER
@@ -14,17 +16,26 @@ public class Product {
     private String image;
     private String idCategory;
     private String namecat;
+    private String barcode;
 
     public Product() {
     }
+    
+    public Product(int id, String nompr, String descrip, String prix) {
+        this.id = id;
+        this.nompr = nompr;
+        this.descrip = descrip;
+        this.prix = prix;
+    }
 
-    public Product(String nompr, String quantity, String descrip, String prix, String image, String idCategory) {
+    public Product(String nompr, String quantity, String descrip, String prix, String image, String idCategory, String barcode) {
         this.nompr = nompr;
         this.quantity = quantity;
         this.descrip = descrip;
         this.prix = prix;
         this.image = image;
-        this.idCategory= idCategory;
+        this.idCategory = idCategory;
+        this.barcode = barcode;
     }
 
     public Product(int id, String nompr, String quantity, String descrip, String prix, String image,String namecat) {
@@ -35,7 +46,37 @@ public class Product {
         this.prix = prix;
         this.image = image;
         this.namecat = namecat;
-        //this.idCategory = idCategory;
+    }
+
+    public Product(int id, String nompr, String quantity, String descrip, String prix, String image, String namecat, String barcode) {
+        this.id = id;
+        this.nompr = nompr;
+        this.quantity = quantity;
+        this.descrip = descrip;
+        this.prix = prix;
+        this.image = image;
+        this.namecat = namecat;
+        this.barcode = barcode;
+    }
+    
+       public Product(int id, String nompr, String prix) {
+        this.id = id;
+        this.nompr = nompr;
+        this.prix = prix;
+    }
+
+    public Product(int id, String nompr) {
+        this.id = id;
+        this.nompr = nompr;
+    }
+    
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     public String getIdCategory() {
@@ -49,6 +90,8 @@ public class Product {
     public String getImage() {
         return image;
     }
+    
+    
 
     public void setImage(String image) {
         this.image = image;
@@ -62,6 +105,10 @@ public class Product {
         this.namecat = namecat;
     }
 
+    public int getId() {
+        return id;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -100,9 +147,26 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", nompr=" + nompr + ", quantity=" + quantity + ", descrip=" + descrip + ", prix=" + prix + ", image=" + image + ", idCategory=" + idCategory + ", namecat=" + namecat + '}';
+        return "Product{" + "id=" + id + ", nompr=" + nompr + ", quantity=" + quantity + ", descrip=" + descrip + ", prix=" + prix + ", image=" + image + ", idCategory=" + idCategory + ", namecat=" + namecat + ", barcode=" + barcode + '}';
     }
     
+     public String toString(double prix) {
+         String ch;
+        return ch = toString(prix);
+                }
+    
+    public int toint(String ch){
+        int x=0;
+        return x=Util.cast(ch);
+        
+    }
+    
+    public double todab(String ch){
+        double x=0;
+        return x=Util.cast(ch);
+        
+    }
+ 
     @Override
     public int hashCode() {
         int hash = 7;
@@ -127,5 +191,9 @@ public class Product {
         }
         return true;
     }
+
+   
+
+   
       
 }
