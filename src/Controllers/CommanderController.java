@@ -105,8 +105,8 @@ public class CommanderController implements Initializable {
          f.setDatedelivraison(dateliv);
 
          try {
-             panier = panierService.getCurrentPanierByUserID(Config.currentUser);
-            f.setPanier_id(Config.currentpanier);
+             panier = panierService.getCurrentPanierByUserID(Main.user_id);
+            f.setPanier_id(panier.getIdpan());
           
          } catch (SQLException ex) {
              ex.getSQLState();
@@ -160,7 +160,7 @@ public class CommanderController implements Initializable {
             alert2.setTitle("Warning Dialog ");
             alert2.setContentText("Numéro de telephone doit etre composer de 8 chiffres");
             alert2.setHeaderText(null);
-            alert2.show();
+            alert2.showAndWait();
             return false;
       
         } else if (isNotInteger(num.getText()) ) {
@@ -169,7 +169,7 @@ public class CommanderController implements Initializable {
             alert1.setTitle("Erreur");
             alert1.setContentText("num doivent etre composer de des chiffres");
             alert1.setHeaderText(null);
-            alert1.show();
+            alert1.showAndWait();
             return false;
         }
         

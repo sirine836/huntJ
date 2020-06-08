@@ -5,11 +5,13 @@
  */
 package Controllers;
 
+import Entities.Facture;
 import Entities.Lignepanier;
 import Entities.Panier;
+import Services.FactureService;
 import Services.LignePanierService;
 import Services.PanierService;
-import Utils.MyDbConnection;
+import Utils.DataBase;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -27,6 +29,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -108,7 +112,16 @@ public class devisController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         LignePanierService ser = new LignePanierService();
+         LocalDate d = java.time.LocalDate.now();
+         DateTimeFormatter DateTimeFormatter = null;
+          Panier panier = new Panier();
+          Panier panier1 = new Panier();
+       Panier pa = new Panier(Main.user_id,d.toString(),0,0,0);
+       Lignepanier lp = new Lignepanier(panier.getIdpan(),1);
+       Facture f = new Facture();
+      PanierService panierService = new PanierService();
+        LignePanierService ser = new LignePanierService();
+        FactureService fa = new FactureService();
        Lignepanier l= new Lignepanier();
     nompr.setCellValueFactory(new PropertyValueFactory<Lignepanier,String>("nompr"));
     prix.setCellValueFactory(new PropertyValueFactory<Lignepanier,Double>("prix"));
@@ -117,13 +130,13 @@ public class devisController implements Initializable {
     nompr.setStyle("-fx-alignment: CENTER;");
     prix.setStyle("-fx-alignment: CENTER;");
     quantite.setStyle("-fx-alignment: CENTER;");
-        try {
-            calc.setText(String.valueOf(ser.calcul_total(Config.currentpanier)));
+        try { panier = panierService.getCurrentPanierByUserID(Main.user_id);
+             calc.setText(String.valueOf(ser.calcul_total(panier.getIdpan())));
         } catch (SQLException ex) {
             Logger.getLogger(devisController.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-        data =ser.indexActiondevis(Config.currentpanier);
+        data =ser.indexActiondevis(panier.getIdpan());
         System.out.println("aaaaa"+data);
         tabled.setItems(data);
         System.out.println(data);
@@ -135,7 +148,7 @@ public class devisController implements Initializable {
     private void backImageV(ActionEvent event) throws IOException {
          try {
         firstpane.getChildren().clear();
-           Parent parent = FXMLLoader.load(getClass().getResource("Panier.fxml"));
+           Parent parent = FXMLLoader.load(getClass().getResource("/gui/Panier.fxml"));
            firstpane.getChildren().add(parent);
            firstpane.toFront();
         } catch (IOException ex) {
@@ -150,15 +163,18 @@ public class devisController implements Initializable {
     private void PDF(ActionEvent event) throws DocumentException, FileNotFoundException {
         try {
             LignePanierService es = new LignePanierService();
+            Panier panier = new Panier();
+            PanierService panierService = new PanierService();
+            panier = panierService.getCurrentPanierByUserID(Main.user_id);
 
-            String file_name = "C:\\Users\\cyrine\\Desktop\\Avis.pdf";
+            String file_name = "C:\\wamp64\\www\\projet_3a\\pidev-java\\Events\\src\\pdf\\Devis.pdf";
             Document document = new Document();
 
             PdfWriter.getInstance(document, new FileOutputStream(file_name));
 
             document.open();
              Paragraph p = new Paragraph("  ");
-             Image img = Image.getInstance("C:\\Users\\cyrine\\Documents\\NetBeansProjects\\huntJ\\src\\Images\\thunt.png");
+             Image img = Image.getInstance("C:\\wamp64\\www\\projet_3a\\pidev-java\\Events\\src\\Images\\thunt.png");
             
              img.scaleAbsolute(200, 200);
             img.setAbsolutePosition(10, 630);
@@ -181,10 +197,10 @@ public class devisController implements Initializable {
            
             
 
-            Connection connexion = MyDbConnection.getInstance().getConnexion();
+            Connection connexion = DataBase.getInstance().getCnx();
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String query = "Select p.nompr,p.prix,lp.quantite from ligne_panier lp join product p where p.id=lp.product_id";
+            String query = "select l.id,p.nompr,P.prix,l.quantite from product p JOIN ligne_panier l ON p.id = l.product_id and panier_id="+panier.getIdpan()+"";
             ps = (PreparedStatement) connexion.prepareStatement(query);
             rs = ps.executeQuery();
             int i = 1;
@@ -205,7 +221,7 @@ public class devisController implements Initializable {
             parrr.setAlignment(Element.ALIGN_CENTER);
             document.add(parrr);
             
-            double a= ser.calcul_total(Config.currentpanier);
+            double a= ser.calcul_total(panier.getIdpan());
                Paragraph p1 = new Paragraph("Prix Total :  "+a + "  DT" ,redF);
                
                p1.setAlignment(Element.ALIGN_CENTER);
