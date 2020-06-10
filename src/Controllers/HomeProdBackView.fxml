@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="676.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeProdBackController">
+   <children>
+      <ImageView fitHeight="168.0" fitWidth="254.0" layoutX="61.0" layoutY="226.0">
+         <image>
+            <Image url="@../Images/prod.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="168.0" fitWidth="254.0" layoutX="379.0" layoutY="226.0">
+         <image>
+            <Image url="@../Images/Categ.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="59.0" layoutY="410.0" prefHeight="43.0" prefWidth="232.0" text="Product Manager">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="378.0" layoutY="410.0" prefHeight="43.0" prefWidth="232.0" text="Category Manager">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnProd" layoutX="42.0" layoutY="198.0" onAction="#prodManag" prefHeight="264.0" prefWidth="287.0" />
+      <JFXButton fx:id="btnCateg" layoutX="338.0" layoutY="198.0" onAction="#categManag" prefHeight="264.0" prefWidth="322.0" />
+      <Label layoutX="19.0" layoutY="35.0" prefHeight="43.0" prefWidth="232.0" text="Store Back" textFill="#ee890d">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="77.0" prefWidth="200.0" />
+      <Label layoutX="739.0" layoutY="414.0" prefHeight="36.0" prefWidth="157.0" text="Email Sender">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="183.0" fitWidth="254.0" layoutX="728.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Mailing.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="Mailing" layoutX="693.0" layoutY="218.0" onAction="#GetMail" prefHeight="184.0" prefWidth="254.0" />
+   </children>
+</AnchorPane>

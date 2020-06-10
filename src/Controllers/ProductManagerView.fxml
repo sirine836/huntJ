@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="676.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProductManagerController">
+    <children>
+      <SplitPane dividerPositions="0.22994652406417113" layoutY="95.0" prefHeight="581.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #CCCCCC;">
+               <children>
+                  <Hyperlink layoutX="6.0" layoutY="7.0" text="Product Name" textFill="#2f2b2b">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font></Hyperlink>
+                  <TextField fx:id="EntrerName" layoutX="10.0" layoutY="44.0" prefHeight="30.0" prefWidth="175.0" promptText="Name Product">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                  <Hyperlink layoutX="6.0" layoutY="85.0" text="Quantity" textFill="#393535">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font></Hyperlink>
+                  <TextField fx:id="EntrerQuantite" layoutX="10.0" layoutY="127.0" promptText="Quantity">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                  <Hyperlink layoutX="11.0" layoutY="165.0" text="Description" textFill="#141313">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font></Hyperlink>
+                  <TextField fx:id="EntrerDescrip" layoutX="10.0" layoutY="203.0" prefHeight="30.0" prefWidth="175.0" promptText="Description">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                  <Hyperlink layoutX="11.0" layoutY="247.0" text="Price" textFill="#141313">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font></Hyperlink>
+                  <TextField fx:id="EntrerPrix" layoutX="10.0" layoutY="283.0" prefHeight="30.0" prefWidth="175.0" promptText="Price">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                  <Hyperlink layoutX="10.0" layoutY="400.0" text="Category Name" textFill="#2c2828">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font></Hyperlink>
+                  <ComboBox fx:id="chooseCat" layoutX="10.0" layoutY="436.0" prefHeight="30.0" prefWidth="175.0" />
+                  <Hyperlink layoutX="9.0" layoutY="322.0" text="Barcode" textFill="#1e1b1b">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Hyperlink>
+                  <TextField fx:id="EntrerBarcode" layoutX="10.0" layoutY="363.0" promptText="Barcode">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="Vider" layoutX="85.0" layoutY="519.0" mnemonicParsing="false" onAction="#ClearFields" prefHeight="48.0" prefWidth="119.0" text="REFRESH">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="41.76" radius="19.6375" width="38.79" />
+                     </effect>
+                  </Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                    <Label fx:id="label" layoutX="-23.0" layoutY="50.0" minHeight="16" minWidth="69" />
+                  <SplitPane dividerPositions="0.5198618307426598" layoutX="61.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="591.0" prefWidth="766.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                    <items>
+                      <AnchorPane fx:id="PaneTab" minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="764.0">
+                           <children>
+                              <TableView fx:id="table" onMouseClicked="#setValue" prefHeight="388.0" prefWidth="764.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="nompr" prefWidth="128.0" text="Product Name" />
+                                    <TableColumn fx:id="quantity" prefWidth="92.0" text="Quantity" />
+                                    <TableColumn fx:id="descrip" prefWidth="93.0" text="Description" />
+                                    <TableColumn fx:id="prix" prefWidth="92.0" text="Price" />
+                                    <TableColumn fx:id="image" minWidth="0.0" prefWidth="133.0" text="image" />
+                                    <TableColumn fx:id="nameCategory" maxWidth="500.0" minWidth="0.0" prefWidth="94.0" text="Category Name" />
+                                    <TableColumn fx:id="QRcode" maxWidth="500.0" minWidth="0.0" prefWidth="133.0" text="Barcode" />
+                                    <TableColumn fx:id="idProd" maxWidth="500.0" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="202.0" prefWidth="764.0">
+                           <children>
+                              <Pane layoutX="25.0" layoutY="21.0" prefHeight="25.0" prefWidth="0.0" />
+                              <Button fx:id="ModifyProduct" layoutX="413.0" layoutY="189.0" mnemonicParsing="false" onAction="#UpDateProduct" prefHeight="48.0" prefWidth="109.0" text="EDIT">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow height="41.76" radius="19.6375" width="38.79" />
+                                 </effect></Button>
+                              <Button fx:id="Add" layoutX="413.0" layoutY="22.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="48.0" prefWidth="109.0" text="ADD">
+                                 <effect>
+                                    <DropShadow height="38.8" radius="18.8975" width="38.79" />
+                                 </effect>
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font></Button>
+                              <Button fx:id="showProducts" layoutX="273.0" layoutY="22.0" mnemonicParsing="false" onAction="#ShowProducts" prefHeight="48.0" prefWidth="109.0" text="SHOW">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow height="38.79" radius="18.895" width="38.79" />
+                                 </effect></Button>
+                              <TextField fx:id="SearchProd" layoutX="575.0" layoutY="19.0" promptText="Search Product">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
+                              <Button fx:id="ajouterPhoto" layoutX="273.0" layoutY="189.0" mnemonicParsing="false" onAction="#addPhoto" prefHeight="48.0" prefWidth="109.0" text="BROWSE">
+                                 <effect>
+                                    <DropShadow height="35.83" radius="16.6725" width="32.86" />
+                                 </effect>
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font></Button>
+                              <Button fx:id="Sort" layoutX="608.0" layoutY="189.0" mnemonicParsing="false" onAction="#SortProducts" prefHeight="48.0" prefWidth="109.0" text="SORT LIST">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow height="44.72" radius="21.119999999999997" width="41.76" />
+                                 </effect>
+                              </Button>
+                              <ImageView fx:id="ImageProd" fitHeight="256.0" fitWidth="238.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <HBox layoutX="569.0" layoutY="23.0" />
+      <Text fill="#de8a1d" layoutX="335.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTS MANAGER" textAlignment="CENTER" wrappingWidth="330.060546875" AnchorPane.bottomAnchor="613.470703125" AnchorPane.leftAnchor="335.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="22.626953125">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font></Text>
+    </children>
+</AnchorPane>

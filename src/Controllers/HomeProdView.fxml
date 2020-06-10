@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="676.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeProdController">
+   <children>
+      <ImageView fitHeight="158.0" fitWidth="223.0" layoutX="217.0" layoutY="226.0">
+         <image>
+            <Image url="@../Images/prod.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="158.0" fitWidth="223.0" layoutX="519.0" layoutY="226.0">
+         <image>
+            <Image url="@../Images/Categ.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="217.0" layoutY="410.0" prefHeight="43.0" prefWidth="223.0" text="Product Manager">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="513.0" layoutY="410.0" prefHeight="43.0" prefWidth="223.0" text="Category Manager">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnProd" layoutX="189.0" layoutY="206.0" onAction="#prodManag" prefHeight="264.0" prefWidth="280.0" />
+      <JFXButton fx:id="btnCateg" layoutX="485.0" layoutY="206.0" onAction="#categManag" prefHeight="264.0" prefWidth="280.0" />
+   </children>
+</AnchorPane>
