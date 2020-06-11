@@ -5,35 +5,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="444.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SendMailController">
+<AnchorPane id="AnchorPane" prefHeight="676.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SendMailController">
    <children>
-      <Text fill="#c60909" layoutX="182.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EMAIL SENDER" wrappingWidth="259.728515625">
+      <Text fill="#c60909" layoutX="416.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EMAIL SENDER" wrappingWidth="259.728515625">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Text>
-      <Label layoutX="60.0" layoutY="115.0" text="Subject :">
+      <Label layoutX="38.0" layoutY="195.0" text="Subject :">
          <font>
             <Font name="System Bold Italic" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="61.0" layoutY="183.0" text="Destination Address :">
+      <Label layoutX="46.0" layoutY="328.0" text="Destination Address :">
          <font>
             <Font name="System Bold Italic" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="61.0" layoutY="252.0" prefHeight="36.0" prefWidth="148.0" text="Message :">
+      <Label layoutX="46.0" layoutY="500.0" prefHeight="36.0" prefWidth="148.0" text="Message :">
          <font>
             <Font name="System Bold Italic" size="25.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="SubjectInput" layoutX="329.0" layoutY="121.0" />
-      <JFXTextField fx:id="ReceiverAdress" layoutX="329.0" layoutY="183.0" />
-      <Button fx:id="SendMail" layoutX="513.0" layoutY="301.0" mnemonicParsing="false" onAction="#Send" prefHeight="35.0" prefWidth="90.0" text="SEND">
+      <JFXTextField fx:id="SubjectInput" layoutX="365.0" layoutY="201.0" prefHeight="25.0" prefWidth="212.0" />
+      <JFXTextField fx:id="ReceiverAdress" layoutX="365.0" layoutY="334.0" prefHeight="25.0" prefWidth="212.0" />
+      <Button fx:id="SendMail" layoutX="859.0" layoutY="512.0" mnemonicParsing="false" onAction="#Send" prefHeight="35.0" prefWidth="90.0" text="SEND">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
@@ -41,8 +43,8 @@
             <DropShadow height="38.79" radius="17.4125" width="32.86" />
          </effect>
       </Button>
-      <TextArea fx:id="Message" layoutX="217.0" layoutY="238.0" prefHeight="102.0" prefWidth="240.0" />
-      <Button fx:id="Refresh" layoutX="505.0" layoutY="376.0" mnemonicParsing="false" onAction="#RefreshAct" prefHeight="39.0" prefWidth="107.0" text="REFRESH">
+      <TextArea fx:id="Message" layoutX="365.0" layoutY="467.0" prefHeight="167.0" prefWidth="269.0" />
+      <Button fx:id="Refresh" layoutX="852.0" layoutY="595.0" mnemonicParsing="false" onAction="#RefreshAct" prefHeight="39.0" prefWidth="107.0" text="REFRESH">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
@@ -50,5 +52,15 @@
             <DropShadow height="38.79" radius="17.4125" width="32.86" />
          </effect>
       </Button>
+      <ImageView fitHeight="84.0" fitWidth="164.0" layoutX="57.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="825.0" AnchorPane.rightAnchor="41.0">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="84.0" fitWidth="164.0" layoutX="41.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="569.0" AnchorPane.leftAnchor="41.0">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
