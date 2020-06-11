@@ -269,7 +269,7 @@ public class ProductManagerController implements Initializable {
              notificationBuilder.show();
         }
         else{
-            Image notif = new Image("/Images/Done.png");
+           Image notif = new Image("/Images/Done.png");
            Notifications notificationBuilder = Notifications.create()
                .title("UPDATE PRODUCT")
                .text("ERROR")

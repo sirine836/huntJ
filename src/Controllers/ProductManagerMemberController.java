@@ -43,9 +43,15 @@ public class ProductManagerMemberController implements Initializable {
     @FXML
     private AnchorPane mainPane;
     @FXML
+    private AnchorPane PaneTab;
+    @FXML
     private Label label;
     @FXML
-    private AnchorPane PaneTab;
+    private Button showProducts;
+    @FXML
+    private Button panier;
+    @FXML
+    private Button Sort;
     @FXML
     private TableView<Product> table;
     @FXML
@@ -66,12 +72,6 @@ public class ProductManagerMemberController implements Initializable {
     private TableColumn<Product , String> idProd;
     @FXML
     private TextField SearchProd;
-    @FXML
-    private Button showProducts;
-    @FXML
-    private Button panier;
-    @FXML
-    private Button Sort;
     @FXML
     private ImageView ImageProd;
 
