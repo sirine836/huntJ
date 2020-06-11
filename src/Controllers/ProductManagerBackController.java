@@ -1,11 +1,7 @@
 
 package Controllers;
 
-import Entities.Lignepanier;
-import Entities.Panier;
 import Entities.Product;
-import Services.LignePanierService;
-import Services.PanierService;
 import Services.ProductService;
 import Utils.DataBase;
 import java.io.BufferedOutputStream;
@@ -21,8 +17,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -69,17 +63,23 @@ public class ProductManagerBackController implements Initializable {
     @FXML
     private Button DeleteProduct;
     @FXML
-    private Label label;
+    private Button ajouterPhoto;
     @FXML
-    private TableView<Product> table;
+    private Button Vider;
     @FXML
     private Button Add;
     @FXML
     private Button Sort;
+    @FXML
+    private Button btn_QRcode;
     @FXML 
     private AnchorPane mainPane;
     @FXML
     private AnchorPane PaneTab;
+    @FXML
+    private Label label;
+    @FXML
+    private TableView<Product> table;
     @FXML 
     private TableColumn<Product,String> nompr;
     @FXML 
@@ -95,6 +95,8 @@ public class ProductManagerBackController implements Initializable {
     @FXML
     private TableColumn<Product,String> idProd;
     @FXML
+    private TableColumn<Product,String> QRcode;
+    @FXML
     private TextField EntrerName;
     @FXML
     private TextField EntrerQuantite;
@@ -103,21 +105,11 @@ public class ProductManagerBackController implements Initializable {
     @FXML
     private TextField EntrerPrix;
     @FXML
-    private Button Vider;
-    @FXML
-    private ComboBox<String> chooseCat;
-    @FXML
-    private Button ajouterPhoto;
-    @FXML
     private TextField SearchProd;
     @FXML
     private TextField EntrerBarcode;
     @FXML
-    private TableColumn<Product,String> QRcode;
-    @FXML
-    private Button btn_QRcode;
-    @FXML
-    private Button addToCart;
+    private ComboBox<String> chooseCat;
     @FXML
     private ImageView ImageProd2;
     
@@ -427,7 +419,7 @@ public class ProductManagerBackController implements Initializable {
     @FXML
     private void generateBarcode(ActionEvent event) throws FileNotFoundException, IOException {
          if(!EntrerBarcode.getText().isEmpty() && !EntrerName.getText().isEmpty()){
-        String Ind = "Barcode Product :" + " " + EntrerBarcode.getText() + "\n" + "Name Product :" + " " +EntrerName.getText() + "\n" + "Lien du Site :" + " " +"http://localhost/huntkingdom/web/app_dev.php";
+        String Ind = "Barcode Product :" + " " + EntrerBarcode.getText() + "\n" + "Name Product :" + " " +EntrerName.getText() + "\n" + "Website Link :" + " " +"http://localhost/huntkingdom/web/app_dev.php";
         ByteArrayOutputStream out = QRCode.from(Ind).to(ImageType.JPG).stream();
         File f = new File("C:\\Users\\MONDHER\\Desktop\\Esprit\\pidev-java\\Events\\src\\ProdQRcode\\QRprod.jpg");
         FileOutputStream fos = new FileOutputStream(f);
@@ -521,61 +513,5 @@ public class ProductManagerBackController implements Initializable {
          chooseCat.setValue(null);
          EntrerBarcode.clear();
     }
-
-   @FXML
-    public void addToCart(ActionEvent event) throws IOException,SQLException{ 
-         Product tableIndex = table.getSelectionModel().getSelectedItem();
-              if(table.getSelectionModel().getSelectedItems().size()!=0){
-      LocalDate d = java.time.LocalDate.now();
-         DateTimeFormatter DateTimeFormatter = null;
-         
-      LignePanierService lpService = new LignePanierService();
-      PanierService panierService = new PanierService();
-      Panier pa = new Panier(Main.user_id,d.toString(),0,0,0);
-      int id_produit = table.getSelectionModel().getSelectedItems().get(0).getId();
-      Panier panier = new Panier();
-      Panier panier1 = new Panier();
-             panier = panierService.getCurrentPanierByUserID(Main.user_id);
-             panier1 = panierService.getCurPanierByUserIDetat(Main.user_id);
-             System.out.println(panier.getIdpan());
-             System.out.println(panier1.getIdpan());
-             Lignepanier lp = new Lignepanier(id_produit,panier.getIdpan(),1);
-            
-                if(panier.getIdpan()>panier1.getIdpan())
-                {
-                    System.out.println(lpService.trouve(id_produit,Main.user_id,panier.getIdpan()));
-                    System.out.println(panier.getIdpan());
-                  if(lpService.trouve(id_produit,Main.user_id,panier.getIdpan())==true )
-                    {
-                        
-                      lpService.increment_qnt(id_produit,panier.getIdpan());
-                      new Alert(Alert.AlertType.INFORMATION, "reajout").show();
-                    }
-                    else
-                    { 
-                      lp.setPanier_id(panier.getIdpan());
-                      lp.setProduct_id(id_produit);
-                      lp.setQuantite(1);
-                      lpService.ajouterLigne2(lp);
-                      new Alert(Alert.AlertType.INFORMATION, "sucess").show();
-                    }
-                }
-                else
-                {
-                  panierService.ajouterPanier2(pa);
-                // lpService.ajouterLigne2(lp);
-                
-                }
-              }
-              else{
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("aucun élément 'a ètè séléctionné");
-        alert.showAndWait();
-       }  
-         table.refresh();
-                    table.getSelectionModel().clearSelection();
-  }
-    
+   
 }
