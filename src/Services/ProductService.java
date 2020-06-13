@@ -22,8 +22,8 @@ import javafx.collections.ObservableList;
 public class ProductService {
     
     Connection connexion = DataBase.getInstance().getCnx();
-   
-
+    final ObservableList<String> choice = FXCollections.observableArrayList();
+  
     public ProductService() {
        
     }
@@ -49,7 +49,7 @@ public class ProductService {
           return  prod;
      }
     
-     public List<Product> displayAll() { //**DONE**s
+     public List<Product> displayAll() { //**DONE**
         ArrayList <Product> tab = new ArrayList ();
         Connection cnx = DataBase.getInstance().getCnx();
         PreparedStatement ps;
@@ -82,6 +82,24 @@ public class ProductService {
         }
      
         return pr;
-    
       }
+         
+       /*-----------------------------------------------*/
+      
+      public ObservableList fillComboBox(){ //Remplir le comboBox par idCategory **DONE**
+        Connection cnx = DataBase.getInstance().getCnx();
+        PreparedStatement ps;
+        try {
+            ps = cnx.prepareStatement("SELECT nomcat FROM category");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                 choice.add((rs.getString(1)));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return choice;
+    }
+    
 }
