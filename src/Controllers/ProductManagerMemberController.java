@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -74,11 +77,16 @@ public class ProductManagerMemberController implements Initializable {
     private TextField SearchProd;
     @FXML
     private ImageView ImageProd;
+    @FXML
+    private ComboBox<String> filterProds;
 
-   public ObservableList<Product> data = FXCollections.observableArrayList();
-
+    public ObservableList<Product> data = FXCollections.observableArrayList();
+    final ObservableList<String> choice = FXCollections.observableArrayList();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        fillComboBox();
+        filterProds.setItems(choice); //Initialiser le ComboBox
         SearchProduct();
     }
     
@@ -163,7 +171,50 @@ public class ProductManagerMemberController implements Initializable {
         QRcode.setCellValueFactory(new PropertyValueFactory<>("barcode"));
         table.setItems(data);
     }
-
+    
+     @FXML
+    private void filterByCat(ActionEvent event) { //Filtrer Les Produits Selon Category **DONE**
+        data.clear();
+        Connection cnx = DataBase.getInstance().getCnx();
+        PreparedStatement ps;
+        
+        try {
+            ps = cnx.prepareStatement("SELECT * FROM product p JOIN category c ON p.idCategory=c.id AND c.nomcat LIKE '%" + filterProds.getValue() + "%'");
+            ResultSet rs = ps.executeQuery();
+          
+            while(rs.next()){
+               data.add(new Product (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
+            }
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        nompr.setCellValueFactory(new PropertyValueFactory<>("nompr"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        descrip.setCellValueFactory(new PropertyValueFactory<>("descrip"));
+        prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        image.setCellValueFactory(new PropertyValueFactory<>("image"));
+        nameCategory.setCellValueFactory(new PropertyValueFactory<>("namecat"));
+        QRcode.setCellValueFactory(new PropertyValueFactory<>("barcode"));
+        table.setItems(data);
+    }
+    
+     public ObservableList fillComboBox(){ //Remplir le comboBox par idCategory **DONE**
+        Connection cnx = DataBase.getInstance().getCnx();
+        PreparedStatement ps;
+        try {
+            ps = cnx.prepareStatement("SELECT nomcat FROM category");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                 choice.add((rs.getString(1)));
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductManagerBackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return choice;
+    }
+    
     @FXML
     private void addToCart(ActionEvent event) throws SQLException {
       Product tableIndex = table.getSelectionModel().getSelectedItem();
