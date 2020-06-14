@@ -34,8 +34,8 @@
                                     <TableColumn fx:id="quantity" prefWidth="138.0" text="Quantity" />
                                     <TableColumn fx:id="descrip" prefWidth="206.0" text="Description" />
                                     <TableColumn fx:id="prix" prefWidth="136.0" text="Price" />
-                                    <TableColumn fx:id="image" minWidth="0.0" prefWidth="176.0" text="image" />
-                                    <TableColumn fx:id="nameCategory" maxWidth="500.0" minWidth="0.0" prefWidth="158.0" text="Category Name" />
+                                    <TableColumn fx:id="image" minWidth="0.0" prefWidth="169.0" text="Image" />
+                                    <TableColumn fx:id="nameCategory" maxWidth="500.0" minWidth="0.0" prefWidth="165.0" text="Category Name" />
                                     <TableColumn fx:id="QRcode" maxWidth="500.0" minWidth="0.0" prefWidth="0.0" text="Barcode" visible="false" />
                                     <TableColumn fx:id="idProd" maxWidth="500.0" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                                 </columns>
@@ -45,7 +45,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="202.0" prefWidth="764.0">
                            <children>
                               <Pane layoutX="25.0" layoutY="21.0" prefHeight="25.0" prefWidth="0.0" />
-                              <Button fx:id="showProducts" alignment="CENTER_RIGHT" layoutX="557.0" layoutY="20.0" mnemonicParsing="false" onAction="#ShowProducts" prefHeight="48.0" prefWidth="110.0" text="SHOW">
+                              <Button fx:id="showProducts" alignment="CENTER_RIGHT" layoutX="351.0" layoutY="20.0" mnemonicParsing="false" onAction="#ShowProducts" prefHeight="48.0" prefWidth="157.0" text="SHOW">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -56,7 +56,7 @@
                                  <font>
                                     <Font size="14.0" />
                                  </font></TextField>
-                              <Button fx:id="Sort" alignment="CENTER_RIGHT" layoutX="533.0" layoutY="117.0" mnemonicParsing="false" onAction="#SortProducts" prefHeight="48.0" prefWidth="157.0" text="SORT LIST">
+                              <Button fx:id="Sort" alignment="CENTER_RIGHT" layoutX="351.0" layoutY="104.0" mnemonicParsing="false" onAction="#SortProducts" prefHeight="48.0" prefWidth="157.0" text="SORT LIST">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -64,8 +64,8 @@
                                     <DropShadow height="44.72" radius="21.119999999999997" width="41.76" />
                                  </effect>
                               </Button>
-                              <ImageView fx:id="ImageProd" fitHeight="265.0" fitWidth="407.0" layoutX="64.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-                              <Button fx:id="panier" alignment="CENTER_RIGHT" layoutX="533.0" layoutY="202.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="48.0" prefWidth="157.0" text="ADD TO CART">
+                              <ImageView fx:id="ImageProd" fitHeight="265.0" fitWidth="309.0" layoutX="12.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button fx:id="panier" alignment="CENTER_RIGHT" layoutX="351.0" layoutY="187.0" mnemonicParsing="false" onAction="#addToCart" prefHeight="48.0" prefWidth="157.0" text="ADD TO CART">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -73,17 +73,17 @@
                                     <DropShadow height="44.72" radius="21.119999999999997" width="41.76" />
                                  </effect>
                               </Button>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="544.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="363.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icon/tri.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="566.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="363.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icon/show.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="544.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="363.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icon/panier.png" />
                                  </image>
@@ -94,14 +94,44 @@
                                  </image>
                               </ImageView>
                               <ComboBox fx:id="filterProds" layoutX="807.0" layoutY="128.0" onAction="#filterByCat" prefHeight="25.0" prefWidth="171.0" />
-                              <Hyperlink layoutX="833.0" layoutY="89.0" text="Filter By :" textFill="#000000e7">
+                              <Hyperlink layoutX="833.0" layoutY="89.0" text="Filter By :" textFill="#de8a1de8">
                                  <font>
                                     <Font name="System Bold Italic" size="17.0" />
                                  </font>
                               </Hyperlink>
                               <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="807.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
+                                    <Image url="@../icon/filteer.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="MAX_PRICE" layoutX="577.0" layoutY="171.0" prefHeight="25.0" prefWidth="171.0" promptText="Max Price" />
+                              <TextField fx:id="MIN_PRICE" layoutX="570.0" layoutY="68.0" prefHeight="17.0" prefWidth="171.0" promptText="Min Price" />
+                              <ImageView fitHeight="48.0" fitWidth="101.0" layoutX="627.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/flech.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="FilterProds" alignment="CENTER_RIGHT" layoutX="619.0" layoutY="215.0" mnemonicParsing="false" onAction="#FilterByPrice" prefHeight="40.0" prefWidth="88.0" text="Filter">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow height="41.76" radius="19.6375" width="38.79" />
+                                 </effect>
+                              </Button>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="627.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
                                     <Image url="@../icon/filter.png" />
+                                 </image>
+                              </ImageView>
+                              <Hyperlink layoutX="596.0" layoutY="17.0" text="Filter By Price :" textFill="#de8a1d">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Hyperlink>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="571.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/filteer.png" />
                                  </image>
                               </ImageView>
                            </children></AnchorPane>
