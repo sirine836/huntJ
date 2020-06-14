@@ -8,6 +8,7 @@ import Services.LignePanierService;
 import Services.PanierService;
 import Services.ProductService;
 import Utils.DataBase;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,13 +17,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -35,6 +36,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+import static org.bouncycastle.crypto.tls.ContentType.alert;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -56,6 +60,8 @@ public class ProductManagerMemberController implements Initializable {
     @FXML
     private Button Sort;
     @FXML
+    private Button FilterProds;
+    @FXML
     private TableView<Product> table;
     @FXML
     private TableColumn<Product , String> nompr;
@@ -76,23 +82,27 @@ public class ProductManagerMemberController implements Initializable {
     @FXML
     private TextField SearchProd;
     @FXML
+    private TextField MAX_PRICE;
+    @FXML
+    private TextField MIN_PRICE;
+    @FXML
     private ImageView ImageProd;
     @FXML
     private ComboBox<String> filterProds;
 
+    ProductService ps = new ProductService();
+    ObservableList listCat = FXCollections.observableList(ps.fillComboBox());
     public ObservableList<Product> data = FXCollections.observableArrayList();
     final ObservableList<String> choice = FXCollections.observableArrayList();
-    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fillComboBox();
-        filterProds.setItems(choice); //Initialiser le ComboBox
-        SearchProduct();
+        filterProds.setItems(listCat); //Initialiser le ComboBox
+        SearchProduct(); 
     }
     
     @FXML
     private void ShowProducts(ActionEvent event) {
-        ProductService ps = new ProductService();
         ObservableList aux = FXCollections.observableList(ps.displayAll());
         idProd.setCellValueFactory(new PropertyValueFactory<>("id"));
         nompr.setCellValueFactory(new PropertyValueFactory<>("nompr"));
@@ -179,11 +189,11 @@ public class ProductManagerMemberController implements Initializable {
         PreparedStatement ps;
         
         try {
-            ps = cnx.prepareStatement("SELECT * FROM product p JOIN category c ON p.idCategory=c.id AND c.nomcat LIKE '%" + filterProds.getValue() + "%'");
+            ps = cnx.prepareStatement("SELECT p.id,p.nompr,p.quantity,p.descrip,p.prix,p.image,c.nomcat FROM product p JOIN category c ON p.idCategory=c.id AND c.nomcat LIKE '%" + filterProds.getValue() + "%'");
             ResultSet rs = ps.executeQuery();
           
             while(rs.next()){
-               data.add(new Product (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)));
+               data.add(new Product (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
             }
            
         } catch (SQLException ex) {
@@ -195,25 +205,96 @@ public class ProductManagerMemberController implements Initializable {
         prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         image.setCellValueFactory(new PropertyValueFactory<>("image"));
         nameCategory.setCellValueFactory(new PropertyValueFactory<>("namecat"));
-        QRcode.setCellValueFactory(new PropertyValueFactory<>("barcode"));
         table.setItems(data);
-    }
+        
+        String url = "";
+        if(filterProds.getValue().equals("Hunting")){
+            url = "/Images/hunt.png";
+        }
+        if(filterProds.getValue().equals("Fishing")){
+            url = "/Images/fish.png";
+        }
+        if(filterProds.getValue().equals("Clothing")){
+            url = "/Images/clothes.png";
+        }
+        
+         Image notif = new Image(url);
+           Notifications notificationBuilder = Notifications.create()
+               .title("FILTER PRODUCTS BY CATEGORY NAME")
+               .text("List Product Has Been Filtred By :" + " " + filterProds.getValue())
+               .graphic(new ImageView(notif))
+               .hideAfter(Duration.seconds(5))
+               .position(Pos.TOP_RIGHT)
+               .onAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+               System.out.println("Clicked on Notification");
+            }
+            
+               });
+             notificationBuilder.darkStyle();
+             notificationBuilder.show();
+        }
     
-     public ObservableList fillComboBox(){ //Remplir le comboBox par idCategory **DONE**
+    @FXML
+    private void FilterByPrice(ActionEvent event) {
+        data.clear();
         Connection cnx = DataBase.getInstance().getCnx();
         PreparedStatement ps;
+        if(ValidFields()){
         try {
-            ps = cnx.prepareStatement("SELECT nomcat FROM category");
+            ps = cnx.prepareStatement("SELECT p.id,p.nompr,p.quantity,p.descrip,p.prix,p.image,c.nomcat FROM product p JOIN category c ON p.idCategory=c.id AND p.prix BETWEEN '" + MIN_PRICE.getText() + "' AND '" + MAX_PRICE.getText() + "' ");
             ResultSet rs = ps.executeQuery();
+          
             while(rs.next()){
-                 choice.add((rs.getString(1)));
+               data.add(new Product(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
             }
-            rs.close();
+           
         } catch (SQLException ex) {
-            Logger.getLogger(ProductManagerBackController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
-        return choice;
+        nompr.setCellValueFactory(new PropertyValueFactory<>("nompr"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        descrip.setCellValueFactory(new PropertyValueFactory<>("descrip"));
+        prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        image.setCellValueFactory(new PropertyValueFactory<>("image"));
+        nameCategory.setCellValueFactory(new PropertyValueFactory<>("namecat"));
+        table.setItems(data);
+        
+         Image notif = new Image("/Images/dollar.png");
+           Notifications notificationBuilder = Notifications.create()
+               .title("FILTER PRODUCTS BY PRICE")
+               .text("List Products With Price Between " + " " + MIN_PRICE.getText() + " " + "And" + " " + MAX_PRICE.getText())
+               .graphic(new ImageView(notif))
+               .hideAfter(Duration.seconds(5))
+               .position(Pos.TOP_RIGHT)
+               .onAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+               System.out.println("Clicked on Notification");
+            }
+               });
+             notificationBuilder.darkStyle();
+             notificationBuilder.show();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Fields Validation");
+            alert.setHeaderText("Information");
+            alert.setContentText("Please check your Fields!!");
+            alert.showAndWait();
+        }
     }
+   
+     public boolean ValidFields(){
+        String val1 = MIN_PRICE.getText();
+        String val2 = MAX_PRICE.getText();
+        Float value1 = Float.parseFloat(val1);
+        Float value2 = Float.parseFloat(val2);
+        if(value1 < value2 && !(MIN_PRICE.getText().isEmpty()) && !(MAX_PRICE.getText().isEmpty())){
+            return true;
+        } 
+        return false;
+     }
     
     @FXML
     private void addToCart(ActionEvent event) throws SQLException {
@@ -267,8 +348,7 @@ public class ProductManagerMemberController implements Initializable {
        }  
          table.refresh();
          table.getSelectionModel().clearSelection();
-  }
-
     }
+  }
     
 
