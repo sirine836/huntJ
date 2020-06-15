@@ -102,21 +102,23 @@ public class ProductManagerController implements Initializable {
     @FXML
     private ComboBox<String> chooseCat;
     @FXML
+    private ComboBox<String> Filter;
+    @FXML
     private ImageView ImageProd;
     
     Connection cnx = DataBase.getInstance().getCnx();
-    final ObservableList<String> choice = FXCollections.observableArrayList();
+    ProductService ps = new ProductService();
+    ObservableList listCat = FXCollections.observableList(ps.fillComboBox());
     public ObservableList<Product> data = FXCollections.observableArrayList();
     String path ="";
     private Stage stage;
     Product produit = new Product();
     private int ID;
-    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fillComboBox();
-        chooseCat.setItems(choice); //Initialiser le ComboBox
-        //data = FXCollections.observableArrayList();
+        Filter.setItems(listCat); //Initialiser le ComboBox
+        chooseCat.setItems(listCat); //Initialiser le ComboBox
         SearchProduct();
     }
    
@@ -251,6 +253,7 @@ public class ProductManagerController implements Initializable {
             
          int status = ps.executeUpdate();
          if(status == 1){
+            refreshTable();
             Image notif = new Image("/Images/Done.png");
            Notifications notificationBuilder = Notifications.create()
                .title("UPDATE PRODUCT")
@@ -296,7 +299,6 @@ public class ProductManagerController implements Initializable {
             alert.setContentText("Please check your Fields!!");
             alert.showAndWait();
           }
-          refreshTable();
      }
     
     private void SearchProduct() { //Recherche avancÃ©e des produits selon nom du produit **DONE**
@@ -360,10 +362,63 @@ public class ProductManagerController implements Initializable {
     }
     
     @FXML
+    private void FilterByPrice(ActionEvent event) {
+        data.clear();
+        Connection cnx = DataBase.getInstance().getCnx();
+        PreparedStatement ps;
+        
+        try {
+            ps = cnx.prepareStatement("SELECT p.id,p.nompr,p.quantity,p.descrip,p.prix,p.image,c.nomcat FROM product p JOIN category c ON p.idCategory=c.id AND c.nomcat LIKE '%" + Filter.getValue() + "%'");
+            ResultSet rs = ps.executeQuery();
+          
+            while(rs.next()){
+               data.add(new Product (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+            }
+           
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        nompr.setCellValueFactory(new PropertyValueFactory<>("nompr"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        descrip.setCellValueFactory(new PropertyValueFactory<>("descrip"));
+        prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        image.setCellValueFactory(new PropertyValueFactory<>("image"));
+        nameCategory.setCellValueFactory(new PropertyValueFactory<>("namecat"));
+        table.setItems(data);
+        
+        String url = "";
+        if(Filter.getValue().equals("Hunting")){
+            url = "/Images/hunt.png";
+        }
+        if(Filter.getValue().equals("Fishing")){
+            url = "/Images/fish.png";
+        }
+        if(Filter.getValue().equals("Clothing")){
+            url = "/Images/clothes.png";
+        }
+        
+         Image notif = new Image(url);
+           Notifications notificationBuilder = Notifications.create()
+               .title("FILTER PRODUCTS BY CATEGORY NAME")
+               .text("List Product Has Been Filtred By :" + " " + Filter.getValue())
+               .graphic(new ImageView(notif))
+               .hideAfter(Duration.seconds(5))
+               .position(Pos.TOP_RIGHT)
+               .onAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+               System.out.println("Clicked on Notification");
+            }
+            
+               });
+             notificationBuilder.darkStyle();
+             notificationBuilder.show();
+    }
+  
+    @FXML
     private void addPhoto(ActionEvent event) { //Ajout image Produit **DONE** 
         BufferedOutputStream stream = null;
         String globalPath="C:\\wamp64\\www\\huntkingdom\\web\\images";
-
 
         try {
 
@@ -417,7 +472,7 @@ public class ProductManagerController implements Initializable {
              notificationBuilder.show();
         }
     
-    public boolean Valid(){ //Controle de saisie du Quantite et le prix du produit **DONE**
+    public boolean Valid(){ //Controle de saisie Text Fields **DONE**
          try{
             String val1 = EntrerPrix.getText();
             String val2 = EntrerQuantite.getText();
@@ -425,7 +480,9 @@ public class ProductManagerController implements Initializable {
             Integer value2 = Integer.parseInt(val2);
             String val3 = EntrerBarcode.getText();
             Integer value3 = Integer.parseInt(val3);
-            if(value1 > 0 && value2 >0 && value3 >0)
+            String NP = EntrerName.getText();
+            String des = EntrerDescrip.getText();
+            if(value1 > 0 && value2 >0 && value3 >0 && NP.matches("^[a-zA-Z]*$") && des.matches("^[a-zA-Z]*$"))
                 return true;
          }
             catch(NumberFormatException e){
@@ -439,22 +496,6 @@ public class ProductManagerController implements Initializable {
             return false;
         }
         return true;
-    }
-    
-    public ObservableList fillComboBox(){ //Remplir le comboBox par idCategory **DONE**
-        Connection cnx = DataBase.getInstance().getCnx();
-        PreparedStatement ps;
-        try {
-            ps = cnx.prepareStatement("SELECT nomcat FROM category");
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                 choice.add((rs.getString(1)));
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductManagerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return choice;
     }
     
     public void refreshTable(){ //Refresh TableView **DONE** 
@@ -482,7 +523,9 @@ public class ProductManagerController implements Initializable {
          EntrerDescrip.clear();
          EntrerPrix.clear();
          chooseCat.setValue(null);
+         Filter.setValue(null);
          EntrerBarcode.clear();
+         SearchProd.clear();
     }
-   
+    
 }
