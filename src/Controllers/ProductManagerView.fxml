@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -26,7 +27,7 @@
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font></Hyperlink>
-                  <TextField fx:id="EntrerName" layoutX="10.0" layoutY="44.0" prefHeight="30.0" prefWidth="175.0" promptText="Name Product">
+                  <TextField fx:id="EntrerName" layoutX="10.0" layoutY="44.0" prefHeight="30.0" prefWidth="175.0" promptText="Product Name">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -69,7 +70,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="Vider" layoutX="85.0" layoutY="519.0" mnemonicParsing="false" onAction="#ClearFields" prefHeight="48.0" prefWidth="119.0" text="REFRESH">
+                  <Button fx:id="Vider" alignment="CENTER_RIGHT" layoutX="93.0" layoutY="495.0" mnemonicParsing="false" onAction="#ClearFields" prefHeight="48.0" prefWidth="120.0" text="REFRESH">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>
@@ -77,6 +78,11 @@
                         <DropShadow height="41.76" radius="19.6375" width="38.79" />
                      </effect>
                   </Button>
+                  <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="102.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/refreshTwo32.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -86,15 +92,15 @@
                     <items>
                       <AnchorPane fx:id="PaneTab" minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="764.0">
                            <children>
-                              <TableView fx:id="table" onMouseClicked="#setValue" prefHeight="388.0" prefWidth="764.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="table" layoutY="7.0" onMouseClicked="#setValue" prefHeight="388.0" prefWidth="764.0" stylesheets="@../CSS/stylesheet.css" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
                                 <columns>
                                   <TableColumn fx:id="nompr" prefWidth="128.0" text="Product Name" />
-                                    <TableColumn fx:id="quantity" prefWidth="92.0" text="Quantity" />
-                                    <TableColumn fx:id="descrip" prefWidth="93.0" text="Description" />
-                                    <TableColumn fx:id="prix" prefWidth="92.0" text="Price" />
-                                    <TableColumn fx:id="image" minWidth="0.0" prefWidth="133.0" text="image" />
-                                    <TableColumn fx:id="nameCategory" maxWidth="500.0" minWidth="0.0" prefWidth="94.0" text="Category Name" />
-                                    <TableColumn fx:id="QRcode" maxWidth="500.0" minWidth="0.0" prefWidth="133.0" text="Barcode" />
+                                    <TableColumn fx:id="quantity" prefWidth="107.0" text="Quantity" />
+                                    <TableColumn fx:id="descrip" prefWidth="150.0" text="Description" />
+                                    <TableColumn fx:id="prix" prefWidth="106.0" text="Price" />
+                                    <TableColumn fx:id="image" minWidth="0.0" prefWidth="128.0" text="Image" />
+                                    <TableColumn fx:id="nameCategory" maxWidth="500.0" minWidth="0.0" prefWidth="146.0" text="Category Name" />
+                                    <TableColumn fx:id="QRcode" maxWidth="500.0" minWidth="0.0" prefWidth="0.0" text="Barcode" visible="false" />
                                     <TableColumn fx:id="idProd" maxWidth="500.0" minWidth="0.0" prefWidth="0.0" text="ID" visible="false" />
                                 </columns>
                               </TableView>
@@ -103,39 +109,39 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="202.0" prefWidth="764.0">
                            <children>
                               <Pane layoutX="25.0" layoutY="21.0" prefHeight="25.0" prefWidth="0.0" />
-                              <Button fx:id="ModifyProduct" layoutX="413.0" layoutY="189.0" mnemonicParsing="false" onAction="#UpDateProduct" prefHeight="48.0" prefWidth="109.0" text="EDIT">
+                              <Button fx:id="ModifyProduct" alignment="CENTER_RIGHT" layoutX="422.0" layoutY="189.0" mnemonicParsing="false" onAction="#UpDateProduct" prefHeight="48.0" prefWidth="119.0" text="EDIT">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                                  <effect>
                                     <DropShadow height="41.76" radius="19.6375" width="38.79" />
                                  </effect></Button>
-                              <Button fx:id="Add" layoutX="413.0" layoutY="22.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="48.0" prefWidth="109.0" text="ADD">
+                              <Button fx:id="Add" alignment="CENTER_RIGHT" layoutX="422.0" layoutY="17.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="48.0" prefWidth="119.0" text="ADD">
                                  <effect>
                                     <DropShadow height="38.8" radius="18.8975" width="38.79" />
                                  </effect>
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font></Button>
-                              <Button fx:id="showProducts" layoutX="273.0" layoutY="22.0" mnemonicParsing="false" onAction="#ShowProducts" prefHeight="48.0" prefWidth="109.0" text="SHOW">
+                              <Button fx:id="showProducts" alignment="CENTER_RIGHT" layoutX="269.0" layoutY="17.0" mnemonicParsing="false" onAction="#ShowProducts" prefHeight="48.0" prefWidth="119.0" text="SHOW">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
                                  <effect>
                                     <DropShadow height="38.79" radius="18.895" width="38.79" />
                                  </effect></Button>
-                              <TextField fx:id="SearchProd" layoutX="575.0" layoutY="19.0" promptText="Search Product">
+                              <TextField fx:id="SearchProd" alignment="TOP_LEFT" layoutX="575.0" layoutY="16.0" promptText="Search Product">
                                  <font>
                                     <Font size="14.0" />
                                  </font></TextField>
-                              <Button fx:id="ajouterPhoto" layoutX="273.0" layoutY="189.0" mnemonicParsing="false" onAction="#addPhoto" prefHeight="48.0" prefWidth="109.0" text="BROWSE">
+                              <Button fx:id="ajouterPhoto" alignment="CENTER_RIGHT" layoutX="269.0" layoutY="189.0" mnemonicParsing="false" onAction="#addPhoto" prefHeight="48.0" prefWidth="119.0" text="BROWSE">
                                  <effect>
                                     <DropShadow height="35.83" radius="16.6725" width="32.86" />
                                  </effect>
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font></Button>
-                              <Button fx:id="Sort" layoutX="608.0" layoutY="189.0" mnemonicParsing="false" onAction="#SortProducts" prefHeight="48.0" prefWidth="109.0" text="SORT LIST">
+                              <Button fx:id="Sort" alignment="CENTER_RIGHT" layoutX="343.0" layoutY="104.0" mnemonicParsing="false" onAction="#SortProducts" prefHeight="48.0" prefWidth="130.0" text="SORT LIST">
                                  <font>
                                     <Font name="System Bold Italic" size="14.0" />
                                  </font>
@@ -144,6 +150,47 @@
                                  </effect>
                               </Button>
                               <ImageView fx:id="ImageProd" fitHeight="256.0" fitWidth="238.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="281.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/show.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="431.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/add_red32.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="281.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/browse.jpg" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="431.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/editRed.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="30.0" fitWidth="36.0" layoutX="352.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/tri.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="722.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/search.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="575.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icon/filteer.png" />
+                                 </image>
+                              </ImageView>
+                              <Hyperlink layoutX="595.0" layoutY="77.0" text="Filter By Category :" textFill="#de8a1d">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Hyperlink>
+                              <ComboBox fx:id="Filter" layoutX="588.0" layoutY="116.0" onAction="#FilterByPrice" prefHeight="25.0" prefWidth="157.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
@@ -152,9 +199,19 @@
         </items>
       </SplitPane>
       <HBox layoutX="569.0" layoutY="23.0" />
-      <Text fill="#de8a1d" layoutX="335.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTS MANAGER" textAlignment="CENTER" wrappingWidth="330.060546875" AnchorPane.bottomAnchor="613.470703125" AnchorPane.leftAnchor="335.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="22.626953125">
+      <Text fill="#de8a1d" layoutX="335.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTS MANAGER" textAlignment="CENTER" wrappingWidth="330.060546875" AnchorPane.bottomAnchor="610.470703125" AnchorPane.leftAnchor="335.0" AnchorPane.rightAnchor="335.41004180908203" AnchorPane.topAnchor="25.626953125">
          <font>
             <Font name="System Bold Italic" size="30.0" />
          </font></Text>
+      <ImageView fitHeight="64.0" fitWidth="163.0" layoutX="845.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="845.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="14.0">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="163.0" layoutX="35.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="598.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="14.0">
+         <image>
+            <Image url="@../Images/logo.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
