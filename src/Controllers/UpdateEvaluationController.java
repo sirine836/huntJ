@@ -5,6 +5,8 @@
  */
 package Controllers;
 
+import static Controllers.EvaluationDetailController.id;
+import static Controllers.NewEvaluationController.isInteger;
 import Entities.Evaluations;
 import Entities.Events;
 import Services.EvaluationService;
@@ -73,7 +75,13 @@ public class UpdateEvaluationController implements Initializable {
     }    
 
     @FXML
-    private void Back(ActionEvent event) {
+    private void Back(ActionEvent event) throws IOException {
+             EvaluationDetailController.id = idEvent;
+            EvaluationDetailController.idUser = Main.fos_user.getId();
+            avr.getChildren().clear();
+        Parent parent = FXMLLoader.load(getClass().getResource("/gui/EvaluationDetail.fxml"));
+        avr.getChildren().add(parent);
+        avr.toFront();
     }
 
     @FXML
@@ -115,6 +123,13 @@ public class UpdateEvaluationController implements Initializable {
             alert.setContentText("tous les champs doivent etre remplis");
             alert.showAndWait();
             return false;
+        } else if (isInteger(Commentch.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Comment must be a string");
+            alert.showAndWait();
+                        return false;
         }
 
         return true;

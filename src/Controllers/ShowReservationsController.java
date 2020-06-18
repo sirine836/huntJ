@@ -5,9 +5,7 @@
  */
 package Controllers;
 
-import Entities.Evaluations;
 import Entities.Reservations;
-import Services.EvaluationService;
 import Services.EventService;
 import Services.ReservationService;
 import Utils.DataBase;
@@ -19,16 +17,13 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.jfoenix.controls.JFXButton;
 import com.mysql.jdbc.PreparedStatement;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +33,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import tray.notification.TrayNotification;
+import tray.notification.NotificationType;
+import tray.animations.AnimationType;  
 
 /**
  * FXML Controller class
@@ -69,7 +67,7 @@ public class ShowReservationsController implements Initializable {
         try {
             EventService es = new EventService();
 
-            String file_name = "C:\\wamp64\\www\\pidev-java\\Events\\src\\pdf\\Reservations.pdf";
+            String file_name = "C:\\wamp64\\www\\projet_3a\\pidev-java\\Events\\src\\pdf\\Reservations.pdf";
             Document document = new Document();
 
             PdfWriter.getInstance(document, new FileOutputStream(file_name));
@@ -85,8 +83,8 @@ public class ShowReservationsController implements Initializable {
             document.add(p);
             document.add(p);
             document.add(p);
-            Image img = Image.getInstance("C:\\wamp64\\www\\pidev-java\\Events\\src\\Images\\logo.png");
-            Image img2 = Image.getInstance("C:\\wamp64\\www\\pidev-java\\Events\\src\\Images\\RESERVATION-ICON.png");
+            Image img = Image.getInstance("C:\\wamp64\\www\\projet_3a\\pidev-java\\Events\\src\\Images\\logo.png");
+            Image img2 = Image.getInstance("C:\\wamp64\\www\\projet_3a\\pidev-java\\Events\\src\\Images\\RESERVATION-ICON.png");
             img.scaleAbsolute(50f, 50f);
             img.setAbsolutePosition(450f, 775f);
             img2.setAbsolutePosition(100f, 775f);
@@ -100,7 +98,7 @@ public class ShowReservationsController implements Initializable {
             Connection cx = DataBase.getInstance().getCnx();
             PreparedStatement ps = null;
             ResultSet rs = null;
-            String query = "SELECT r.id, r.quantite, r.prixpaye, u.username, e.titre , e.Image FROM reservation r INNER JOIN events e ON r.event_id=e.id INNER JOIN fos_user u ON r.user_id=u.id ";
+            String query = "SELECT r.id, r.quantite, r.prixpaye, u.username, e.titre , e.nom_image FROM reservation r INNER JOIN events e ON r.event_id=e.id INNER JOIN fos_user u ON r.user_id=u.id ";
             ps = (PreparedStatement) cx.prepareStatement(query);
             rs = ps.executeQuery();
             int i = 1;
@@ -113,7 +111,7 @@ public class ShowReservationsController implements Initializable {
                 para.setAlignment(Element.ALIGN_CENTER);
 
                 document.add(para);
-                Image imageEvent = Image.getInstance("http://localhost//pidev-java/Events/src/Images/Upload/" + rs.getString("Image"));
+                Image imageEvent = Image.getInstance("http://localhost//projet_3a/symfony/web/images/" + rs.getString("nom_image"));
                 imageEvent.scaleAbsolute(400f, 150f);
                 imageEvent.setAlignment(Element.ALIGN_CENTER);
 
@@ -125,6 +123,13 @@ public class ShowReservationsController implements Initializable {
             }
 
             document.close();
+             String tit = "PDF";
+            String message = "PDF telechargé avec succés.";
+            NotificationType notification = NotificationType.SUCCESS;
+    
+            TrayNotification tray = new TrayNotification(tit, message, notification);          
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.showAndDismiss(javafx.util.Duration.seconds(10));
             System.out.println("finished");
         } catch (Exception e) {
             System.err.println(e);
@@ -144,7 +149,7 @@ public class ShowReservationsController implements Initializable {
             C1.setCellValueFactory(new PropertyValueFactory<Reservations, String>("titre"));
             C2.setCellValueFactory(new PropertyValueFactory<Reservations, String>("quantite"));
             C3.setCellValueFactory(new PropertyValueFactory<Reservations, String>("prixpaye"));
-            C4.setCellValueFactory(new PropertyValueFactory<Reservations, String>("usename"));
+            C4.setCellValueFactory(new PropertyValueFactory<Reservations, String>("username"));
 
             table.setItems(reservation);
         }

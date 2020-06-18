@@ -8,8 +8,12 @@ package Controllers;
 import static Controllers.EvaluationDetailController.id;
 import Entities.Events;
 import Entities.Reservations;
+import java.util.Optional;
+import java.awt.AWTException;
 import Services.EventService;
 import Services.ReservationService;
+import com.itextpdf.text.log.Level;
+import com.itextpdf.text.log.Logger;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,6 +35,8 @@ import javafx.scene.text.Text;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
+
+
 
 /**
  * FXML Controller class
@@ -98,13 +105,13 @@ public class ReservationDetailController implements Initializable {
             alert.setTitle("WARNING");
             alert.setHeaderText(null);
             alert.setContentText("Are you sure you want to delete your reservation ?");
-            alert.showAndWait();
-                EventService es = new EventService();
+            
+            Optional<ButtonType> action = alert.showAndWait();
+          if (action.get() == ButtonType.OK) {
+            try {
+               EventService es = new EventService();
              es.increment_nb(id);
              evs.supprimer(eva.getId());
-         
-
-                
               String tit = "Reservation deleted";
             String message = "Reservation deleted successfully";
             NotificationType notification = NotificationType.SUCCESS;
@@ -119,6 +126,10 @@ public class ReservationDetailController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("/gui/DetailEvent.fxml"));
             avr.getChildren().add(parent);
             avr.toFront();
+            } catch (Exception ex) {
+                java.util.logging.Logger.getLogger(ReservationDetailController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+          }       
     }
     
 }

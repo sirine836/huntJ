@@ -110,7 +110,7 @@ public class EventsController implements Initializable {
         LocalisationLa.setText(local);
         NbrPlacesLa.setText(Integer.toString(nbrPlaces));
         selectedid = (Events) table.getSelectionModel().getSelectedItem();
-        Image image = new Image("http://localhost//pidev-java/Events/src/Images/Upload/" + selectedid.getImage());
+        Image image = new Image("http://localhost//projet_3a/symfony/web/images/" + selectedid.getNom_image());
         ImgEvent.setImage(image);
         
         BTDescription.setOnAction(
